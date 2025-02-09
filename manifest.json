@@ -16,5 +16,18 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "https://hikinarou.com/ryuuseika-pwa/images/screenshot-wide.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "https://hikinarou.com/ryuuseika-pwa/images/screenshot-mobile.png",
+      "sizes": "414x896",
+      "type": "image/png"
+    }
   ]
 }
