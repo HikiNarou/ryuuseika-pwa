@@ -1,7 +1,7 @@
 {
   "name": "Ryuuseika",
   "short_name": "Ryuuseika",
-  "start_url": "https://www.ryuuseika.top",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#000000",
