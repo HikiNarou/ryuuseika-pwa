@@ -1,6 +1,6 @@
 const CACHE_NAME = "pwa-blog-v1";
 const ASSETS = [
-  "/index.html",
+  "https://www.ryuuseika.top/index.html",
   "https://hikinarou.com/ryuuseika-pwa/icons/icon-192.png",
   "https://hikinarou.com/ryuuseika-pwa/icons/icon-512.png"
 ];
