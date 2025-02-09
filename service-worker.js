@@ -1,8 +1,8 @@
 const CACHE_NAME = "pwa-blog-v1";
 const ASSETS = [
   "/index.html",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png"
+  "https://hikinarou.com/ryuuseika-pwa/icons/icon-192.png",
+  "https://hikinarou.com/ryuuseika-pwa/icons/icon-512.png"
 ];
 
 // Install
