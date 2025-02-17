@@ -2,7 +2,7 @@
   "name": "Ryuuseika Novel",
   "short_name": "Ryuuseika",
   "description": "Read Novels Online for Free",
-  "start_url": "/",
+  "start_url": "https://www.ryuuseika.top",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#14dcb4",
