@@ -1,10 +1,12 @@
 {
-  "name": "Ryuuseika",
+  "name": "Ryuuseika Novel",
   "short_name": "Ryuuseika",
-  "start_url": "https://www.ryuuseika.top/index.html",
+  "description": "Read Novels Online for Free",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#000000",
+  "background_color": "#000000",
+  "theme_color": "#14dcb4",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "https://hikinarou.com/ryuuseika-pwa/icons/icon-192.png",
