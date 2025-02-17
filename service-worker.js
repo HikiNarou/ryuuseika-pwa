@@ -6,7 +6,7 @@ const ASSET_URLS = [ // Daftar URL aset untuk di-cache saat instalasi (aset stat
   'https://hikinarou.com/ryuuseika-pwa/manifest.json', // Cache file manifest
   'https://hikinarou.com/ryuuseika-pwa/icons/icon-192x192.png',
   'https://hikinarou.com/ryuuseika-pwa/icons/icon-512x512.png',
-  '/theme-4536747516074318835 (2).xml', // Cache file tema Anda (jika statis)
+  'https://hikinarou.com/ryuuseika-pwa/theme-4536747516074318835 (2).xml', // Cache file tema Anda (jika statis)
   'https://hikinarou.com/path/to/your/style.css', // Cache file CSS utama Anda (ganti dengan URL CSS Anda yang sebenarnya)
   'https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js', // Contoh sumber daya eksternal untuk di-cache
   'https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js',
