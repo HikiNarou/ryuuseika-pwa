@@ -88,20 +88,17 @@ self.addEventListener('push', event => {
   let title = 'Ryuuseika PWA';
   let body = 'Dapatkan update terbaru dan konten menarik lainnya!';
   let icon = 'https://hikinarou.com/ryuuseika-pwa/icons/icon-192.png';
-  let badge = 'https://hikinarou.com/ryuuseika-pwa/icons/badge-96x96.png';
 
   if (event.data) {
     const data = event.data.json();
     title = data.title || title;
     body = data.body || body;
     icon = data.icon || icon;
-    badge = data.badge || badge;
   }
 
   const options = {
     body: body,
     icon: icon,
-    badge: badge,
     vibrate: [100, 50, 100],
     data: { primaryKey: 1 },
   };
