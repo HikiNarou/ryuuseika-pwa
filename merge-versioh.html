@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIKMA Terintegrasi</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;600;700&family=Song+Myung&display=swap" rel="stylesheet">
+
+    <style>
+        /* MERGED CSS */
+
+        /* Base Variables (prioritized from profile_data.html and settings.html) */
+        :root {
+            --primary-color: #3498db;
+            --primary-hover-color: #2980b9;
+            --secondary-color: #2ecc71;
+            --secondary-hover-color: #27ae60;
+            --danger-color: #e74c3c;
+            --danger-hover-color: #c0392b;
+
+            --body-bg-light: #f0f2f5; /* from profile_data */
+            --card-bg-light: #ffffff;
+            --text-color-light: #333;
+            --text-muted-light: #6c757d;
+            --border-color-light: #dee2e6;
+            --input-bg-light: #ffffff;
+            --input-border-light: #ced4da;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --tag-bg-light: #e9ecef;
+            --tag-text-light: #495057;
+            
+            /* settings.html specific, can be merged or aliased if needed */
+            --settings-title-color-light: #172b4d;
+            --settings-section-title-color-light: #34495e;
+            --settings-border-color-light: #e0e0e0; /* slightly different from border-color-light */
+            --settings-section-border-color-light: #ecf0f1;
+            --form-label-color-light: #555; /* from settings */
+            --form-input-bg-settings-light: #fdfdfd; /* from settings */
+            --form-input-border-settings-light: #ddd; /* from settings */
+            --form-input-readonly-bg-light: #ecf0f1; /* from settings */
+            --profile-avatar-border-light: #ecf0f1; /* from settings */
+            --btn-save-bg-light: #2ecc71; /* from settings */
+            --btn-save-hover-bg-light: #27ae60; /* from settings */
+            --toggle-slider-bg-light: #ccc; /* from settings */
+            --toggle-slider-active-bg-light: #3498db; /* from settings */
+            --preference-item-border-light: #f0f0f0; /* from settings */
+            --link-color-light: #172b4d; /* from settings */
+
+
+            --body-bg-dark: #121212; /* from profile_data */
+            --card-bg-dark: #1e1e1e;
+            --text-color-dark: #e0e0e0;
+            --text-muted-dark: #a0a0a0;
+            --border-color-dark: #3a3a3a;
+            --input-bg-dark: #2c2c2c;
+            --input-border-dark: #444;
+            --shadow-dark: rgba(255, 255, 255, 0.05);
+            --tag-bg-dark: #333;
+            --tag-text-dark: #ccc;
+
+            /* settings.html dark theme vars */
+            --settings-title-color-dark: #c0c0c0;
+            --settings-section-title-color-dark: #b0b0b0;
+            --settings-border-color-dark: #444; /* same as border-color-dark */
+            --settings-section-border-color-dark: #3d3d3d;
+            --form-label-color-dark: #a0a0a0; /* same as text-muted-dark */
+            --form-input-bg-settings-dark: #3d3d3d; /* from settings */
+            --form-input-border-settings-dark: #555; /* from settings */
+            --form-input-readonly-bg-dark: #444; /* from settings */
+            --profile-avatar-border-dark: #444; /* from settings */
+            --toggle-slider-bg-dark: #555; /* from settings */
+            --preference-item-border-dark: #3d3d3d; /* from settings */
+            --link-color-dark: #6fa8dc; /* from settings */
+
+
+            /* Default to light theme variables */
+            --body-bg: var(--body-bg-light);
+            --card-bg: var(--card-bg-light);
+            --text-color: var(--text-color-light);
+            --text-muted: var(--text-muted-light);
+            --border-color: var(--border-color-light);
+            --input-bg: var(--input-bg-light);
+            --input-border: var(--input-border-light);
+            --shadow-color: var(--shadow-light);
+            --tag-bg: var(--tag-bg-light);
+            --tag-text: var(--tag-text-light);
+            
+            --sidebar-bg: var(--card-bg-light); /* Using card-bg for sidebar */
+            --header-bg: var(--card-bg-light); /* Using card-bg for header */
+            
+            --nav-icon-color: #7f8c8d;
+            --nav-icon-active-bg: var(--primary-color);
+            --nav-icon-active-color: #ffffff;
+            --nav-icon-hover-bg: #f0f0f0; /* from profile_data */
+            --nav-icon-hover-color: var(--primary-color);
+            
+            --skill-card-bg: #f8f9fa; /* from profile_data */
+            --skill-card-border: #e9ecef; /* from profile_data */
+            --skill-card-hover-bg: #e9ecef; /* from profile_data */
+            --skill-card-active-bg: var(--primary-color);
+            --skill-card-active-text: #ffffff;
+            --skill-card-icon-color: var(--primary-color);
+
+            /* Settings specific vars, aliasing to general if possible or keeping separate */
+            --settings-title-color: var(--settings-title-color-light);
+            --settings-section-title-color: var(--settings-section-title-color-light);
+            --settings-border-color: var(--settings-border-color-light);
+            --settings-section-border-color: var(--settings-section-border-color-light);
+            --form-label-color: var(--form-label-color-light);
+            --form-input-bg-settings: var(--form-input-bg-settings-light);
+            --form-input-border-settings: var(--form-input-border-settings-light);
+            --form-input-text: var(--text-color-light); /* General text color for inputs */
+            --form-input-focus-border: var(--primary-color);
+            --form-input-focus-shadow: rgba(52, 152, 219, 0.2);
+            --form-input-readonly-bg: var(--form-input-readonly-bg-light);
+            --profile-avatar-border: var(--profile-avatar-border-light);
+            --btn-save-bg: var(--btn-save-bg-light);
+            --btn-save-hover-bg: var(--btn-save-hover-bg-light);
+            --toggle-slider-bg: var(--toggle-slider-bg-light);
+            --toggle-slider-active-bg: var(--toggle-slider-active-bg-light);
+            --preference-item-border: var(--preference-item-border-light);
+            --preference-item-text: var(--text-color-light);
+            --link-color: var(--link-color-light);
+
+            /* style.css specific variables (for home page cards) */
+            --card-img-height: 200px;
+        }
+
+        .dark-theme {
+            --body-bg: var(--body-bg-dark);
+            --card-bg: var(--card-bg-dark);
+            --text-color: var(--text-color-dark);
+            --text-muted: var(--text-muted-dark);
+            --border-color: var(--border-color-dark);
+            --input-bg: var(--input-bg-dark);
+            --input-border: var(--input-border-dark);
+            --shadow-color: var(--shadow-dark);
+            --tag-bg: var(--tag-bg-dark);
+            --tag-text: var(--tag-text-dark);
+
+            --sidebar-bg: var(--card-bg-dark);
+            --header-bg: var(--card-bg-dark);
+            
+            --nav-icon-color: #a0a0a0; /* from profile_data dark */
+            --nav-icon-hover-bg: #3d3d3d; /* from profile_data dark */
+            --nav-icon-hover-color: var(--primary-color);
+            
+            --skill-card-bg: #2a2a2a; /* from profile_data dark */
+            --skill-card-border: #3a3a3a; /* from profile_data dark */
+            --skill-card-hover-bg: #3a3a3a; /* from profile_data dark */
+            --skill-card-icon-color: var(--primary-color);
+
+            /* Settings specific dark vars */
+            --settings-title-color: var(--settings-title-color-dark);
+            --settings-section-title-color: var(--settings-section-title-color-dark);
+            --settings-border-color: var(--settings-border-color-dark);
+            --settings-section-border-color: var(--settings-section-border-color-dark);
+            --form-label-color: var(--form-label-color-dark);
+            --form-input-bg-settings: var(--form-input-bg-settings-dark);
+            --form-input-border-settings: var(--form-input-border-settings-dark);
+            --form-input-text: var(--text-color-dark);
+            --form-input-focus-shadow: rgba(52, 152, 219, 0.3);
+            --form-input-readonly-bg: var(--form-input-readonly-bg-dark);
+            --profile-avatar-border: var(--profile-avatar-border-dark);
+            --toggle-slider-bg: var(--toggle-slider-bg-dark);
+            --preference-item-border: var(--preference-item-border-dark);
+            --preference-item-text: var(--text-color-dark);
+            --link-color: var(--link-color-dark);
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Open Sans', 'Roboto', sans-serif; /* Prioritize Poppins, then Open Sans, then Roboto */
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 15px; /* from profile_data */
+            line-height: 1.6; /* from profile_data */
+        }
+        a { text-decoration: none; color: var(--primary-color); transition: color 0.2s; }
+        a:hover { color: var(--primary-hover-color); }
+        body a { /* More general link color from settings.html, can be overridden by more specific 'a' styles */
+            color: var(--link-color);
+        }
+
+
+        /* Layout Container */
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Sidebar (Using profile_data.html structure and styles) */
+        .sidebar {
+            width: 90px; /* from profile_data */
+            background-color: var(--sidebar-bg);
+            padding: 25px 0; /* from profile_data */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 3px 0 10px var(--shadow-color); /* from profile_data */
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .logo { margin-bottom: 35px; /* from profile_data */ }
+        .logo img { width: 50px; /* from profile_data */ height: auto; transition: transform 0.3s ease; }
+        .logo img:hover { transform: scale(1.1); }
+        .dark-theme .logo img { filter: brightness(0.9) saturate(1.2); }
+
+        .navigation ul { list-style: none; padding: 0; width: 100%; }
+        .navigation ul li { margin-bottom: 20px; /* from profile_data */ text-align: center; }
+        .navigation ul li a {
+            color: var(--nav-icon-color);
+            display: flex;
+            flex-direction: column; /* For icon and text */
+            justify-content: center;
+            align-items: center;
+            padding: 12px 5px; /* from profile_data */
+            border-radius: 8px;
+            width: 60px; /* from profile_data */
+            height: 60px; /* from profile_data */
+            margin: 0 auto;
+            transition: background-color 0.2s, color 0.2s, transform 0.2s;
+        }
+        .navigation ul li .icon { font-size: 22px; /* from profile_data */ margin-bottom: 4px; }
+        .navigation ul li .nav-text { font-size: 11px; /* from profile_data */ font-weight: 500; }
+        .navigation ul li.active a {
+            background-color: var(--nav-icon-active-bg);
+            color: var(--nav-icon-active-color) !important;
+        }
+        .navigation ul li.active a .icon,
+        .navigation ul li.active a .nav-text {
+            color: var(--nav-icon-active-color) !important;
+        }
+        .navigation ul li a:hover {
+            background-color: var(--nav-icon-hover-bg);
+            color: var(--nav-icon-hover-color);
+            transform: translateY(-2px); /* from profile_data */
+        }
+        .navigation ul li a:hover .icon,
+        .navigation ul li a:hover .nav-text {
+            color: var(--nav-icon-hover-color);
+        }
+
+        /* Main Content Wrapper (replaces individual .main-content for layout) */
+        .main-content-wrapper {
+            flex-grow: 1;
+            padding: 25px; /* from profile_data */
+            margin-left: 90px; /* Width of sidebar */
+            overflow-y: auto;
+            background-color: var(--body-bg); /* Match body background */
+            transition: background-color 0.3s;
+        }
+
+        /* Shared Header (Using profile_data.html structure and styles) */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px; /* from profile_data */
+            background-color: var(--header-bg);
+            padding: 15px 25px; /* from profile_data */
+            border-radius: 12px; /* from profile_data */
+            box-shadow: 0 4px 12px var(--shadow-color); /* from profile_data */
+            transition: background-color 0.3s, box-shadow 0.3s;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .header.scrolled { box-shadow: 0 6px 20px var(--shadow-color); padding: 12px 25px; }
+
+        .user-profile { display: flex; align-items: center; }
+        .user-profile .avatar {
+            width: 45px; /* from profile_data */
+            height: 45px; /* from profile_data */
+            border-radius: 50%;
+            margin-right: 12px; /* from profile_data */
+            border: 2px solid var(--primary-color); /* from profile_data */
+            object-fit: cover;
+        }
+        .user-profile span { font-weight: 600; font-size: 17px; /* from profile_data */ color: var(--text-color); }
+        .header-actions { display: flex; align-items: center; gap: 15px; /* from profile_data */ }
+        .notification-icon i { font-size: 22px; /* from profile_data */ color: var(--text-muted); cursor: pointer; transition: color 0.2s; }
+        .notification-icon i:hover { color: var(--primary-color); }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--input-bg); /* from profile_data */
+            border: 1px solid var(--input-border); /* from profile_data */
+            border-radius: 25px; /* from profile_data */
+            padding: 6px 8px 6px 15px; /* from profile_data */
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 8px 0; /* from profile_data */
+            font-size: 14px; /* from profile_data */
+            background-color: transparent;
+            min-width: 180px; /* from profile_data */
+            color: var(--text-color);
+        }
+        .dark-theme .search-bar input::placeholder { color: var(--text-muted-dark); }
+        .search-bar .search-button {
+            background-color: var(--primary-color); /* from profile_data */
+            border: none;
+            color: white;
+            width: 32px; /* from profile_data */
+            height: 32px; /* from profile_data */
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px; /* from profile_data */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .search-bar .search-button:hover { background-color: var(--primary-hover-color); }
+
+
+        /* Page Content Styling */
+        .page-content {
+            display: none; /* Hidden by default, JS will make active */
+        }
+        .page-content.active {
+            display: block;
+        }
+
+        /* --- Styles from style.css (for Home Page) --- */
+        .internship-recommendations {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .internship-recommendations h2,
+        .explore-companies h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--settings-title-color); /* Using a common title color */
+            font-family: 'Roboto', 'Song Myung', serif;
+            font-weight: bold;
+        }
+        .recommendation-swiper {
+            width: 100%;
+            padding-bottom: 40px;
+        }
+        .recommendation-card.swiper-slide {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            overflow: hidden;
+            position: relative;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .recommendation-card.swiper-slide:hover { transform: scale(1.02); }
+        .recommendation-card .card-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 70%);
+            border-radius: 15px; z-index: 1;
+        }
+        .recommendation-card .card-content { position: relative; z-index: 2; }
+        .recommendation-card h3 { font-size: 22px; font-weight: bold; margin-bottom: 5px; color: #ffffff; font-family: 'Roboto', sans-serif; }
+        .recommendation-card .card-subtitle { font-size: 14px; color: #f0f0f0; margin-bottom: 10px; }
+        .recommendation-card .card-description {
+            font-size: 13px; line-height: 1.5; color: #e0e0e0; margin-bottom: 15px;
+            height: 40px; overflow: hidden; text-overflow: ellipsis;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        }
+        .btn-detail {
+            background-color: #f1c40f; color: #2c3e50 !important; border: none;
+            padding: 10px 18px; border-radius: 20px; cursor: pointer;
+            font-weight: 500; font-size: 13px; transition: background-color 0.3s ease, transform 0.3s ease;
+            align-self: flex-start; text-decoration: none; display: inline-block; text-transform: none;
+        }
+        .btn-detail:hover { background-color: #e0b30b; transform: scale(1.03); }
+        .recommendation-swiper .swiper-pagination-bullet { background-color: #bdc3c7; opacity: 0.8; }
+        .recommendation-swiper .swiper-pagination-bullet-active { background-color: #7f8c8d; opacity: 1; }
+
+        .explore-companies { margin-bottom: 30px; }
+        .explore-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .category-filter select {
+            padding: 8px 12px; border-radius: 6px; border: 1px solid var(--input-border);
+            background-color: var(--input-bg); font-size: 14px;
+            font-family: 'Roboto', sans-serif; color: var(--text-color);
+        }
+        .dark-theme .category-filter select {
+             border-color: var(--input-border-dark);
+             background-color: var(--input-bg-dark);
+             color: var(--text-color-dark);
+        }
+
+        /* Updated styles for company-grid to enable horizontal scroll and 4 cards per row */
+        .company-grid {
+            display: flex;       /* Enable flexbox layout */
+            overflow-x: auto;    /* Allow horizontal scrolling */
+            overflow-y: hidden;  /* Prevent vertical scroll within this container */
+            padding-bottom: 20px;/* Space for scrollbar if it appears outside */
+            gap: 25px;           /* Space between cards */
+            /* transition: all 200ms ease-in-out; /* Kept from original style.css */
+        }
+
+        .card.card-hover-effect {
+            flex: 0 0 auto; /* Prevent cards from shrinking or growing */
+            width: calc(25% - 18.75px); /* Aim for 4 cards: 100%/4 = 25%. Gap adjustment: (25px * 3 gaps) / 4 cards */
+            max-width: 325px; /* Original max-width from style.css */
+            min-width: 280px; /* Prevent cards from becoming too small, can be adjusted */
+            /* align-self, position, background, transition, border-radius, box-shadow, overflow are from original .card.card-hover-effect */
+            align-self: start; 
+            position: relative; 
+            background: var(--card-bg); 
+            transition: all 300ms ease-in-out;
+            border-radius: 12px; 
+            box-shadow: 0 6px 12px var(--shadow-color); 
+            overflow: hidden; 
+        }
+
+        /* Responsive adjustments for horizontally scrolling .company-grid */
+        @media (max-width: 1350px) { /* Adjust breakpoint for 3 cards to be comfortable */
+            .card.card-hover-effect {
+                width: calc(33.333% - 16.67px); /* Aim for 3 cards. Gap adjustment: (25px * 2 gaps) / 3 cards */
+                min-width: 260px;
+            }
+        }
+
+        @media (max-width: 992px) { /* Tablet - Aim for 2 cards */
+            .card.card-hover-effect {
+                width: calc(50% - 12.5px); /* Aim for 2 cards. Gap adjustment: (25px * 1 gap) / 2 cards */
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 600px) { /* Mobile - Aim for 1.x cards visible to hint scrolling */
+            .card.card-hover-effect {
+                width: 75%; /* Show 1 card and a bit of the next to hint at scrollability */
+                min-width: 240px; /* Ensure it's not too narrow */
+            }
+        }
+        /* End of updated styles for company-grid */
+
+
+        .card.card-hover-effect .card-img {
+            visibility: hidden; width: 100%; height: var(--card-img-height);
+            background-repeat: no-repeat; background-position: center center; background-size: cover;
+            border-top-left-radius: 12px; border-top-right-radius: 12px;
+        }
+        .card.card-hover-effect .card-link {
+            display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+        }
+        .card.card-hover-effect .card-img-hovered {
+            --card-img-hovered-overlay: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0));
+            transition: all 350ms ease-in-out; background-repeat: no-repeat;
+            background-position: center center; background-size: cover;
+            width: 100%; height: var(--card-img-height);
+            border-top-left-radius: 12px; border-top-right-radius: 12px;
+        }
+        .card.card-hover-effect .card-info {
+            position: relative; padding: 1rem 1.25rem; /* Consistent padding */
+            transition: all 200ms ease-in-out; background-color: var(--card-bg);
+            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
+            z-index: 2;
+        }
+        .card.card-hover-effect .card-info .card-about {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.5rem 0; transition: all 200ms ease-in-out;
+        }
+        .card.card-hover-effect .card-tag {
+            padding: 0.25rem 0.7rem; font-size: 10px; text-align: center;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            background: var(--tag-bg); color: var(--tag-text) !important;
+            border-radius: 4px;
+        }
+        .dark-theme .card.card-hover-effect .card-tag {
+             background: var(--tag-bg-dark); color: var(--tag-text-dark) !important;
+        }
+        .card.card-hover-effect .card-tag.tag-news { background: #36b37e; color:white !important; }
+        .card.card-hover-effect .card-tag.tag-deals { background: #ffab00; color:white !important; }
+        .card.card-hover-effect .card-tag.tag-politics { background: #ff5630; color:white !important; }
+        .card.card-hover-effect .card-time { font-size: 11px; color: var(--text-muted); }
+        .card.card-hover-effect .card-title {
+            font-family: 'Roboto', 'Song Myung', serif; font-size: 1.2rem; font-weight: 500;
+            padding-bottom: 0.5rem; margin-top: 0.25rem; transition: all 350ms ease-in-out;
+            color: var(--text-color); /* Use theme text color */
+        }
+        .card.card-hover-effect .card-creator {
+            font-size: 0.85rem; padding-bottom: 0.75rem; transition: all 250ms ease-in-out;
+            color: var(--text-muted); line-height: 1.5;
+        }
+        .card.card-hover-effect .card-creator a { color: var(--primary-color); font-weight: 500; }
+        .card.card-hover-effect .card-creator a:hover { text-decoration: underline; }
+        .card.card-hover-effect .explore-btn-detail { margin-top: 0.5rem; align-self: flex-start; }
+
+        .card.card-hover-effect:hover {
+            cursor: pointer; box-shadow: 0px 12px 30px rgba(0,0,0,0.1), 0px 6px 15px rgba(0,0,0,0.07);
+            transform: translateY(-5px) scale(1.02); /* Enhanced hover effect */
+        }
+        .card.card-hover-effect:hover .card-img-hovered {
+            --card-img-hovered-overlay: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85)); /* Darker overlay */
+            height: 100%; border-radius: 12px;
+        }
+        .card.card-hover-effect:hover .card-about,
+        .card.card-hover-effect:hover .card-creator,
+        .card.card-hover-effect:hover .explore-btn-detail { opacity: 0; transition-delay: 0s; }
+        .card.card-hover-effect:hover .card-info { background-color: transparent; padding: 1rem 1.25rem; }
+        .card.card-hover-effect:hover .card-title {
+            color: #fff; position: absolute; bottom: 1.25rem; left: 1.25rem; right: 1.25rem;
+            transform: none; padding-bottom: 0;
+            transition: color 0.3s ease-out 0.1s, transform 0.3s ease-out 0.1s;
+        }
+        /* Placeholder images for explore cards */
+        .card-1 .card-img, .card-1 .card-img-hovered { background-image: var(--card-img-hovered-overlay), url('https://placehold.co/325x200/A9CCE3/2C3E50?text=Anjas+Sejati&font=Roboto'); }
+        .card-2 .card-img, .card-2 .card-img-hovered { background-image: var(--card-img-hovered-overlay), url('https://placehold.co/325x200/A2D9CE/1E8449?text=Maju+Bersama&font=Roboto'); }
+        .card-3 .card-img, .card-3 .card-img-hovered { background-image: var(--card-img-hovered-overlay), url('https://placehold.co/325x200/F5B7B1/922B21?text=Cipta+Karya&font=Roboto'); }
+
+
+        /* --- Styles from profile_data.html <style> --- */
+        .profile-data-page { 
+            background-color: var(--card-bg);
+            padding: 30px; border-radius: 16px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .profile-data-page h1 {
+            font-size: 26px; color: var(--text-color); font-family: 'Poppins', serif;
+            font-weight: 700; margin-bottom: 25px; padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .profile-data-page h1 i { color: var(--primary-color); }
+
+        .profile-data-section { margin-bottom: 35px; padding: 20px; border-radius:12px; background-color: var(--body-bg); border: 1px solid var(--border-color); }
+        .profile-data-section h2 {
+            font-size: 18px; color: var(--primary-color); font-family: 'Poppins', sans-serif;
+            font-weight: 600; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .profile-data-section h2 i { font-size: 20px; }
+        .section-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; margin-top: -2px; }
+
+        .preference-options-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px; margin-bottom: 15px;
+        }
+        .preference-option-card {
+            background-color: var(--skill-card-bg); border: 1px solid var(--skill-card-border);
+            padding: 10px 12px; border-radius: 8px; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-color);
+            transition: all 0.2s ease-in-out; box-shadow: 0 2px 4px var(--shadow-color);
+        }
+        .preference-option-card:hover {
+            transform: translateY(-2px); border-color: var(--primary-color);
+            box-shadow: 0 3px 8px color-mix(in srgb, var(--primary-color) 15%, transparent);
+        }
+        .preference-option-card.active {
+            background-color: var(--primary-color); color: var(--skill-card-active-text) !important;
+            border-color: var(--primary-color);
+            box-shadow: 0 3px 8px color-mix(in srgb, var(--primary-color) 30%, transparent);
+        }
+        .preference-option-card.active .preference-icon { color: var(--skill-card-active-text) !important; }
+        .preference-icon { font-size: 18px; color: var(--primary-color); min-width: 20px; text-align: center; }
+        .add-other-preference-card {
+            background-color: var(--tag-bg); border-style: dashed; border-color: var(--input-border);
+            color: var(--text-muted);
+        }
+        .add-other-preference-card:hover {
+            background-color: color-mix(in srgb, var(--tag-bg) 90%, black); color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .dark-theme .add-other-preference-card:hover { background-color: color-mix(in srgb, var(--tag-bg) 90%, white); }
+        .dark-theme .add-other-preference-card { color: var(--text-muted-dark); }
+
+        .manual-input-area {
+            padding: 15px; background-color: color-mix(in srgb, var(--skill-card-bg) 80%, transparent);
+            border: 1px solid var(--skill-card-border); border-radius: 10px;
+            margin-top: 10px; margin-bottom: 15px; box-shadow: inset 0 1px 3px var(--shadow-color);
+        }
+        .manual-input-area .form-group { margin-bottom: 10px; }
+        .manual-input-area .btn-sm { padding: 8px 12px; font-size: 13px; margin-top: 5px; }
+        .item-tag.system-defined-tag {
+            background-color: var(--tag-bg); color: var(--tag-text); cursor: default;
+        }
+        .item-tag.system-defined-tag:hover { transform: none; box-shadow: 0 1px 3px var(--shadow-color); }
+        .dark-theme .item-tag.system-defined-tag { background-color: var(--tag-bg-dark); color: var(--tag-text-dark); }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block; font-size: 14px; color: var(--text-muted); /* Use text-muted for labels */
+            margin-bottom: 6px; font-weight: 500;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%; padding: 10px 14px; font-size: 15px;
+            border: 1px solid var(--input-border); border-radius: 8px;
+            background-color: var(--input-bg); color: var(--text-color);
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none; border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent);
+        }
+        .form-group textarea { min-height: 90px; resize: vertical; }
+        
+        .btn { /* General button styling from profile_data */
+            padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer;
+            font-size: 14px; font-weight: 500; transition: all 0.2s ease-in-out;
+            text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn:active { transform: translateY(0px); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        .btn-primary { background-color: var(--primary-color); color: white !important; }
+        .btn-primary:hover { background-color: var(--primary-hover-color); }
+        .btn-secondary { background-color: var(--tag-bg); color: var(--text-color) !important; border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background-color: color-mix(in srgb, var(--tag-bg) 90%, black); border-color: var(--primary-color); }
+        .dark-theme .btn-secondary:hover { background-color: color-mix(in srgb, var(--tag-bg) 90%, white); }
+        
+        .btn-save-all { 
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); 
+            color: white !important; margin-top: 25px; padding: 12px 25px; font-size: 16px; font-weight: 600;
+            width: 100%;
+        }
+        .btn-save-all:hover { 
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-hover-color)); 
+            box-shadow: 0 6px 15px color-mix(in srgb, var(--primary-color) 30%, transparent);
+        }
+
+        .items-list-display {
+            display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;
+            padding: 15px; border: 1px dashed var(--border-color); border-radius: 8px; min-height: 50px;
+            background-color: color-mix(in srgb, var(--input-bg) 50%, transparent);
+        }
+        .item-tag {
+            background-color: var(--tag-bg); color: var(--tag-text);
+            padding: 6px 12px; border-radius: 20px; font-size: 13px;
+            display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 1px 3px var(--shadow-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .item-tag:hover { transform: translateY(-1px); box-shadow: 0 2px 5px var(--shadow-color); }
+        .item-tag .item-name { font-weight: 500; }
+        .item-tag .item-details { font-size: 0.85em; color: var(--text-muted); margin-left: 4px; opacity: 0.8; }
+        .item-tag .remove-item {
+            cursor: pointer; color: var(--text-muted); font-size: 14px; padding: 2px; border-radius: 50%;
+            transition: color 0.2s, background-color 0.2s; background: none; border:none;
+        }
+        .item-tag .remove-item:hover { color: var(--danger-color); background-color: color-mix(in srgb, var(--danger-color) 15%, transparent); }
+
+        .modal {
+            display: none; position: fixed; z-index: 1001; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px); animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-content {
+            background-color: var(--card-bg); margin: 8% auto; padding: 25px 30px;
+            border: none; width: 90%; max-width: 550px; border-radius: 12px; position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: slideInModal 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        @keyframes slideInModal { from { transform: translateY(-50px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+        .dark-theme .modal-content { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 15px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color);
+        }
+        .modal-header h3 { color: var(--text-color); font-size: 20px; font-weight: 600; }
+        .modal-header h3 i { margin-right: 8px; color: var(--primary-color); }
+        .close-btn {
+            color: var(--text-muted); background: none; border: none;
+            font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .close-btn:hover { color: var(--danger-color); transform: rotate(90deg); }
+
+        .predefined-skills-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px; margin-bottom: 25px;
+        }
+        .skill-option-card {
+            background-color: var(--skill-card-bg); border: 1px solid var(--skill-card-border);
+            padding: 15px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 12px;
+            font-size: 15px; color: var(--text-color); transition: all 0.2s ease-in-out;
+            box-shadow: 0 3px 7px var(--shadow-color);
+        }
+        .skill-option-card:hover {
+            transform: translateY(-3px) scale(1.02); border-color: var(--primary-color);
+            box-shadow: 0 5px 15px color-mix(in srgb, var(--primary-color) 20%, transparent);
+        }
+        .skill-option-card.active {
+            background-color: var(--skill-card-active-bg); color: var(--skill-card-active-text) !important;
+            border-color: var(--skill-card-active-bg);
+            box-shadow: 0 4px 10px color-mix(in srgb, var(--primary-color) 40%, transparent);
+        }
+        .skill-option-card.active .skill-icon { color: var(--skill-card-active-text) !important; }
+        .skill-icon { font-size: 22px; color: var(--skill-card-icon-color); transition: color 0.2s; min-width: 25px; text-align: center; }
+        
+        .manual-skill-input-group {
+            padding: 20px; background-color: var(--skill-card-bg);
+            border: 1px solid var(--skill-card-border);
+            border-radius: 10px; margin-bottom: 20px;
+            box-shadow: 0 3px 7px var(--shadow-color);
+        }
+        .manual-skill-input-group h4 {
+            font-size: 16px; color: var(--text-color); margin-bottom: 15px; font-weight: 600;
+            display: flex; align-items: center; gap: 8px;
+        }
+         .manual-skill-input-group h4 i { color: var(--primary-color); }
+
+        /* --- Styles from settings.html <style> --- */
+        .settings-page { 
+            background-color: var(--card-bg); 
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color); 
+            transition: background-color 0.3s;
+        }
+        .settings-page h1 {
+            font-size: 28px;
+            color: var(--settings-title-color);
+            font-family: 'Roboto', 'Song Myung', serif;
+            font-weight: bold;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--settings-border-color);
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .settings-section { margin-bottom: 40px; }
+        .settings-section h2 {
+            font-size: 20px;
+            color: var(--settings-section-title-color);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--settings-section-border-color);
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .settings-page .form-group input[type="text"],
+        .settings-page .form-group input[type="email"],
+        .settings-page .form-group input[type="password"],
+        .settings-page .form-group textarea,
+        .settings-page .form-group select {
+            background-color: var(--form-input-bg-settings); 
+            border-color: var(--form-input-border-settings); 
+            color: var(--form-input-text);
+        }
+         .settings-page .form-group label {
+            color: var(--form-label-color); 
+         }
+
+        .form-group input[readonly] { 
+            background-color: var(--form-input-readonly-bg);
+            cursor: not-allowed;
+        }
+        .profile-avatar-section {
+            display: flex; align-items: center; margin-bottom: 25px;
+        }
+        .profile-avatar-preview {
+            width: 80px; height: 80px; border-radius: 50%; margin-right: 20px;
+            object-fit: cover; border: 3px solid var(--profile-avatar-border);
+            transition: border-color 0.3s;
+        }
+        .avatar-upload-btn {
+            padding: 10px 15px; background-color: var(--primary-color); 
+            color: white !important; border: none; border-radius: 5px; cursor: pointer;
+            font-size: 14px; transition: background-color 0.3s;
+        }
+        .avatar-upload-btn:hover { background-color: var(--primary-hover-color); }
+        .avatar-upload-label { font-size: 13px; color: var(--text-muted); margin-left: 10px; }
+        .dark-theme .avatar-upload-label { color: var(--text-muted-dark); }
+
+        .btn-save-changes { 
+            background-color: var(--btn-save-bg);
+            color: #ffffff !important; border: none; padding: 12px 25px;
+            border-radius: 25px; cursor: pointer; font-weight: 500; font-size: 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-transform: none;
+        }
+        .btn-save-changes:hover { background-color: var(--btn-save-hover-bg); transform: translateY(-1px); }
+        .btn-danger { background-color: var(--danger-color); } 
+        .btn-danger:hover { background-color: var(--danger-hover-color); }
+
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+
+        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 28px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--toggle-slider-bg);
+            transition: .4s; border-radius: 28px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 20px; width: 20px;
+            left: 4px; bottom: 4px; background-color: white;
+            transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--toggle-slider-active-bg); }
+        input:checked + .slider:before { transform: translateX(22px); }
+        .preference-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid var(--preference-item-border);
+            transition: border-color 0.3s;
+        }
+        .preference-item:last-child { border-bottom: none; }
+        .preference-item p { margin: 0; font-size: 15px; color: var(--preference-item-text); transition: color 0.3s; }
+
+
+        /* Responsive adjustments (Combined and refined) */
+        @media (max-width: 992px) { /* Tablet */
+            /* .search-bar input { min-width: 150px; } /* Already handled by .company-grid specific responsive */
+            /* .company-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; } /* Covered by new flex scroll */
+             /* :root { --card-img-height: 190px; } /* This global override might be too broad, handled by card specific media queries if needed */
+        }
+
+        @media (max-width: 768px) { /* Mobile landscape / Small Tablet */
+            .main-content-wrapper { margin-left: 0; padding: 15px; }
+            .sidebar {
+                width: 100%; height: 70px; flex-direction: row; justify-content: space-around;
+                bottom: 0; top: auto; box-shadow: 0 -3px 10px var(--shadow-color);
+            }
+            .logo { display: none; } 
+            .navigation ul { display: flex; width: auto; gap: 5px; }
+            .navigation ul li { margin-bottom: 0; }
+            .navigation ul li a { width: 55px; height: 55px; } 
+
+            .header {
+                border-radius: 0; margin-left: -15px; margin-right: -15px; padding: 12px 15px;
+            }
+            .header.scrolled { padding: 10px 15px; }
+            .user-profile span { font-size: 15px; }
+            .user-profile .avatar { width: 38px; height: 38px; }
+            .search-bar { padding: 4px 6px 4px 12px; }
+            .search-bar input { min-width: 100px; font-size: 13px; }
+            .search-bar .search-button { width: 28px; height: 28px; font-size: 12px; }
+
+            .profile-data-page, .settings-page, #page-home {
+                 margin-bottom: 70px; 
+            }
+             #page-home { padding-bottom: 70px; }
+
+
+            .profile-data-page h1 { font-size: 22px; }
+            .settings-page h1 { font-size: 24px; }
+            .settings-section h2 { font-size: 18px; }
+
+            .modal-content { margin: 15% auto; width: 95%; padding: 20px; }
+            .predefined-skills-container, .preference-options-container { grid-template-columns: 1fr; gap: 10px; }
+            .form-row { flex-direction: column; gap: 0; }
+            .profile-avatar-section { flex-direction: column; align-items: flex-start; }
+            .profile-avatar-preview { margin-bottom: 10px; }
+
+            .recommendation-card.swiper-slide { height: 190px; border-radius: 10px; }
+            .recommendation-card h3 { font-size: 18px; }
+            .recommendation-card .card-description { -webkit-line-clamp: 2; height: auto; }
+            .explore-header { flex-direction: column; align-items: stretch; }
+            .explore-header h2 { margin-bottom: 10px; }
+            .category-filter { width: 100%; margin-bottom: 15px; }
+            .category-filter select { width: 100%; }
+            /* .company-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } /* Covered by new flex scroll */
+            /* :root { --card-img-height: 180px; } */
+            /* .card.card-hover-effect .card-title { font-size: 1.1rem; } /* Covered by new flex scroll */
+        }
+
+        @media (max-width: 480px) { /* Mobile portrait */
+            .main-content-wrapper { padding:10px; }
+            .header { padding: 10px; } 
+            .user-profile span { display: none; } 
+            .user-profile .avatar { margin-right: 5px; }
+            .search-bar { display:none;  }
+
+
+            .settings-page, .profile-data-page { padding: 15px; }
+            .settings-page h1, .profile-data-page h1 { font-size: 20px; }
+            .btn-save-changes, .btn-save-all { width: 100%; text-align: center; font-size: 14px; padding: 10px 20px; }
+            
+            .internship-recommendations h2, .explore-companies h2 { font-size: 18px; }
+            .btn-detail { padding: 8px 12px; font-size: 12px; }
+            .recommendation-card.swiper-slide { height: 180px; }
+            .recommendation-card h3 { font-size: 16px; }
+            /* .company-grid { grid-template-columns: 1fr; } /* Covered by new flex scroll */
+            /* :root { --card-img-height: 170px; } */
+            /* .card.card-hover-effect .card-title { font-size: 1rem; } /* Covered by new flex scroll */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="https://i.ibb.co/mCpp6NzJ/sikma-logo2-removebg-preview.png" alt="Logo SIKMA">
+            </div>
+            <nav class="navigation">
+                <ul>
+                    <li id="nav-home" class="active"><a href="#" onclick="showPage('page-home', this.parentNode); return false;"><i class="fas fa-home icon"></i><span class="nav-text">Home</span></a></li>
+                    <li id="nav-profile"><a href="#" onclick="showPage('page-profile', this.parentNode); return false;"><i class="fas fa-user-edit icon"></i><span class="nav-text">Profil</span></a></li>
+                    <li id="nav-settings"><a href="#" onclick="showPage('page-settings', this.parentNode); return false;"><i class="fas fa-cog icon"></i><span class="nav-text">Setelan</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="header">
+                <div class="user-profile">
+                    <img src="https://placehold.co/60x60/3498db/ffffff?text=U" alt="Foto Profil" class="avatar" id="sharedAvatarPreview">
+                    <span id="sharedUserName">Nama Mahasiswa</span>
+                </div>
+                <div class="header-actions">
+                    <div class="notification-icon"><i class="fas fa-bell"></i></div>
+                    <div class="search-bar">
+                        <input type="text" id="mainSearchInput" placeholder="Cari...">
+                        <button class="search-button" id="mainSearchButton"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </header>
+
+            <main id="page-home" class="page-content active">
+                <section class="internship-recommendations">
+                    <h2>Rekomendasi Magang</h2>
+                    <div class="swiper-container recommendation-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/E67E22/FFFFFF?text=Pertamina&font=Roboto');">
+                                <div class="card-overlay"></div>
+                                <div class="card-content">
+                                    <h3>Pertamina</h3>
+                                    <p class="card-subtitle">Shawn Gracia</p>
+                                    <p class="card-description">Perusahaan BUMN energi terbesar.</p>
+                                    <button class="btn-detail">Lihat Detail</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/2ECC71/FFFFFF?text=PT.KAI&font=Roboto');">
+                                <div class="card-overlay"></div>
+                                <div class="card-content">
+                                    <h3>PT. KAI</h3>
+                                    <p class="card-subtitle">Shawn Gracia</p>
+                                    <p class="card-description">Operator kereta api nasional.</p>
+                                    <button class="btn-detail">Lihat Detail</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/3498DB/FFFFFF?text=Mandiri&font=Roboto');">
+                                <div class="card-overlay"></div>
+                                <div class="card-content">
+                                    <h3>Mandiri</h3>
+                                    <p class="card-subtitle">Shawn Gracia</p>
+                                    <p class="card-description">Salah satu bank terbesar di Indonesia.</p>
+                                    <button class="btn-detail">Lihat Detail</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/9B59B6/FFFFFF?text=Telkom+Indonesia&font=Roboto');">
+                                <div class="card-overlay"></div>
+                                <div class="card-content">
+                                    <h3>Telkom Indonesia</h3>
+                                    <p class="card-subtitle">Budi Doremi</p>
+                                    <p class="card-description">Perusahaan telekomunikasi terkemuka.</p>
+                                    <button class="btn-detail">Lihat Detail</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/F1C40F/FFFFFF?text=Unilever&font=Roboto');">
+                                <div class="card-overlay"></div>
+                                <div class="card-content">
+                                    <h3>Unilever</h3>
+                                    <p class="card-subtitle">Citra Kirana</p>
+                                    <p class="card-description">Produk konsumen global ternama.</p>
+                                    <button class="btn-detail">Lihat Detail</button>
+                                </div>
+                            </div>
+                             <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/E74C3C/FFFFFF?text=Garuda+Indonesia&font=Roboto');">
+                                <div class="card-overlay"></div>
+                                <div class="card-content">
+                                    <h3>Garuda Indonesia</h3>
+                                    <p class="card-subtitle">Rizky Billar</p>
+                                    <p class="card-description">Maskapai penerbangan nasional.</p>
+                                    <button class="btn-detail">Lihat Detail</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </section>
+    
+                <section class="explore-companies">
+                    <div class="explore-header">
+                        <h2>Jelajahi Perusahaan Lainnya</h2>
+                        <div class="category-filter">
+                            <select id="companyCategoryFilter">
+                                <option value="">Semua Kategori</option> <option value="teknologi">Teknologi</option>
+                                <option value="keuangan">Keuangan</option>
+                                <option value="manufaktur">Manufaktur</option>
+                                <option value="energi">Energi</option> <option value="transportasi">Transportasi</option>
+                                <option value="retail">Retail</option>
+                                <option value="media">Media</option>
+                                <option value="konstruksi">Konstruksi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="company-grid">
+                        <div class="card card-hover-effect card-1" data-category="teknologi">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link">
+                                <div class="card-img-hovered"></div>
+                            </a>
+                            <div class="card-info">
+                                <div class="card-about">
+                                    <span class="card-tag tag-news">Teknologi</span>
+                                    <div class="card-time">PT</div>
+                                </div>
+                                <h1 class="card-title">PT Anjas Sejati</h1>
+                                <div class="card-creator">Deskripsi singkat Anjas Sejati. Bergerak di bidang AI.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect card-2" data-category="keuangan">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link">
+                                <div class="card-img-hovered"></div>
+                            </a>
+                            <div class="card-info">
+                                <div class="card-about">
+                                    <span class="card-tag tag-deals">Keuangan</span>
+                                    <div class="card-time">BUMN</div>
+                                </div>
+                                <h1 class="card-title">PT Maju Bersama</h1>
+                                <div class="card-creator">Lembaga keuangan terpercaya sejak 1980.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                         <div class="card card-hover-effect card-3" data-category="manufaktur">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link">
+                                <div class="card-img-hovered"></div>
+                            </a>
+                            <div class="card-info">
+                                <div class="card-about">
+                                    <span class="card-tag tag-politics">Manufaktur</span>
+                                    <div class="card-time">Swasta</div>
+                                </div>
+                                <h1 class="card-title">PT Cipta Karya</h1>
+                                <div class="card-creator">Produsen barang konsumsi berkualitas tinggi.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="energi" style="--card-img-url: url('https://placehold.co/325x200/F39C12/FFFFFF?text=Energi+Terbarukan&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link">
+                                <div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div>
+                            </a>
+                            <div class="card-info">
+                                <div class="card-about">
+                                    <span class="card-tag" style="background-color: #F39C12; color:white !important;">Energi</span>
+                                    <div class="card-time">StartUp</div>
+                                </div>
+                                <h1 class="card-title">PT Sinar Abadi</h1>
+                                <div class="card-creator">Pengembangan solusi energi terbarukan.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+
+                        <div class="card card-hover-effect" data-category="media" style="--card-img-url: url('https://placehold.co/325x200/7D3C98/FFFFFF?text=Kreatif+Solusi&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #7D3C98; color:white !important;">Media</span><div class="card-time">Agency</div></div>
+                                <h1 class="card-title">Kreatif Solusi</h1>
+                                <div class="card-creator">Agensi media dengan fokus pada konten digital.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="konstruksi" style="--card-img-url: url('https://placehold.co/325x200/16A085/FFFFFF?text=Bangun+Jaya&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #16A085; color:white !important;">Konstruksi</span><div class="card-time">Kontraktor</div></div>
+                                <h1 class="card-title">Bangun Jaya Konstruksi</h1>
+                                <div class="card-creator">Spesialis konstruksi gedung bertingkat.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="retail" style="--card-img-url: url('https://placehold.co/325x200/D35400/FFFFFF?text=Retail+Makmur&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #D35400; color:white !important;">Retail</span><div class="card-time">Waralaba</div></div>
+                                <h1 class="card-title">Retail Makmur</h1>
+                                <div class="card-creator">Jaringan toko kelontong modern dan lengkap.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="transportasi" style="--card-img-url: url('https://placehold.co/325x200/27AE60/FFFFFF?text=Transport+Cepat&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #27AE60; color:white !important;">Transportasi</span><div class="card-time">Logistik</div></div>
+                                <h1 class="card-title">Transport Cepat</h1>
+                                <div class="card-creator">Solusi pengiriman barang antar kota.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="keuangan" style="--card-img-url: url('https://placehold.co/325x200/8E44AD/FFFFFF?text=Fintech+Inovasi&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag tag-deals">Keuangan</span><div class="card-time">Startup</div></div>
+                                <h1 class="card-title">Fintech Inovasi</h1>
+                                <div class="card-creator">Platform pembayaran digital terdepan.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="teknologi" style="--card-img-url: url('https://placehold.co/325x200/2C3E50/FFFFFF?text=Edukasi+Pintar&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag tag-news">Teknologi</span><div class="card-time">Edutech</div></div>
+                                <h1 class="card-title">Edukasi Pintar</h1>
+                                <div class="card-creator">Platform belajar online interaktif.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="manufaktur" style="--card-img-url: url('https://placehold.co/325x200/C0392B/FFFFFF?text=Manufaktur+Presisi&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag tag-politics">Manufaktur</span><div class="card-time">Pabrik</div></div>
+                                <h1 class="card-title">Manufaktur Presisi</h1>
+                                <div class="card-creator">Pembuatan komponen mesin presisi tinggi.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="energi" style="--card-img-url: url('https://placehold.co/325x200/F1C40F/FFFFFF?text=Energi+Hijau&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #F1C40F; color:#333 !important;">Energi</span><div class="card-time">Swasta</div></div>
+                                <h1 class="card-title">Energi Hijau Nusantara</h1>
+                                <div class="card-creator">Penyedia solusi panel surya.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="media" style="--card-img-url: url('https://placehold.co/325x200/7F8C8D/FFFFFF?text=Media+Dinamis&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #7F8C8D; color:white !important;">Media</span><div class="card-time">Digital</div></div>
+                                <h1 class="card-title">Media Digital Dinamis</h1>
+                                <div class="card-creator">Layanan streaming dan konten kreatif.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="konstruksi" style="--card-img-url: url('https://placehold.co/325x200/9B59B6/FFFFFF?text=Properti+Megah&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #9B59B6; color:white !important;">Konstruksi</span><div class="card-time">Developer</div></div>
+                                <h1 class="card-title">Properti Megah</h1>
+                                <div class="card-creator">Pengembang perumahan elit dan komersial.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="retail" style="--card-img-url: url('https://placehold.co/325x200/34495E/FFFFFF?text=Toko+Serba+Ada&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #34495E; color:white !important;">Retail</span><div class="card-time">UMKM</div></div>
+                                <h1 class="card-title">Toko Serba Ada</h1>
+                                <div class="card-creator">Menyediakan kebutuhan sehari-hari.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+                        <div class="card card-hover-effect" data-category="transportasi" style="--card-img-url: url('https://placehold.co/325x200/1ABC9C/FFFFFF?text=Logistik+Handal&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag" style="background-color: #1ABC9C; color:white !important;">Transportasi</span><div class="card-time">Nasional</div></div>
+                                <h1 class="card-title">Logistik Handal</h1>
+                                <div class="card-creator">Jasa kargo dan ekspedisi terpercaya.</div>
+                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </main>
+
+            <main id="page-profile" class="page-content">
+                <div class="profile-data-page">
+                    <h1><i class="fas fa-id-card"></i>Lengkapi Data Profil Anda</h1>
+    
+                    <section class="profile-data-section">
+                        <h2><i class="fas fa-code"></i>Keahlian Bahasa Pemrograman</h2>
+                        <div class="items-list-display" id="programmingSkillsList"></div>
+                        <button id="addProgSkillBtn" class="btn btn-secondary" style="margin-top:15px;"><i class="fas fa-plus-circle"></i>Tambah Bahasa</button>
+                    </section>
+    
+                    <section class="profile-data-section">
+                        <h2><i class="fas fa-cubes"></i>Framework yang Dikuasai</h2>
+                        <div class="items-list-display" id="frameworksList"></div>
+                        <button id="addFrameworkBtn" class="btn btn-secondary" style="margin-top:15px;"><i class="fas fa-plus-circle"></i>Tambah Framework</button>
+                    </section>
+    
+                    <section class="profile-data-section">
+                        <h2><i class="fas fa-tools"></i>Tools yang Digunakan</h2>
+                        <div class="form-group">
+                            <label for="toolsInput">Sebutkan tools (pisahkan dengan koma)</label>
+                            <input type="text" id="toolsInput" placeholder="cth: VS Code, Android Studio, Figma">
+                        </div>
+                        <button id="addToolsBtn" class="btn btn-secondary" style="margin-bottom:10px;"><i class="fas fa-plus-circle"></i>Tambah Tools</button>
+                        <div class="items-list-display" id="toolsDisplayArea"></div>
+                    </section>
+    
+                    <section class="profile-data-section">
+                        <h2><i class="fas fa-puzzle-piece"></i>Keahlian Lainnya (Opsional)</h2>
+                        <p class="section-subtitle">Pilih dari daftar atau tambahkan keahlian spesifik Anda.</p>
+                        
+                        <div class="predefined-skills-container" id="predefinedOtherSkills">
+                            <div class="skill-option-card" data-value="Desain Grafis"><span class="skill-icon"><i class="fas fa-palette"></i></span> Desain Grafis</div>
+                            <div class="skill-option-card" data-value="Analisis Data"><span class="skill-icon"><i class="fas fa-chart-line"></i></span> Analisis Data</div>
+                            <div class="skill-option-card" data-value="Public Speaking"><span class="skill-icon"><i class="fas fa-microphone-alt"></i></span> Public Speaking</div>
+                            <div class="skill-option-card" data-value="Manajemen Proyek"><span class="skill-icon"><i class="fas fa-tasks"></i></span> Manajemen Proyek</div>
+                            <div class="skill-option-card" data-value="Menulis Kreatif"><span class="skill-icon"><i class="fas fa-pencil-alt"></i></span> Menulis Kreatif</div>
+                            <div class="skill-option-card" data-value="Pemasaran Digital"><span class="skill-icon"><i class="fas fa-bullhorn"></i></span> Pemasaran Digital</div>
+                        </div>
+    
+                        <div class="manual-skill-input-group">
+                            <h4><i class="fas fa-keyboard"></i>Tambahkan Keahlian Spesifik Lainnya:</h4>
+                            <div class="form-group">
+                                <label for="otherSkillManualName">Nama Keahlian:</label>
+                                <input type="text" id="otherSkillManualName" placeholder="cth: Fotografi Produk, Riset UX">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="otherSkillManualDesc">Deskripsi/Tingkat Keahlian (Opsional):</label>
+                                <textarea id="otherSkillManualDesc" placeholder="cth: Mahir, pengalaman 1 tahun, portofolio tersedia"></textarea>
+                            </div>
+                        </div>
+                        <button id="addOtherSkillBtn" class="btn btn-secondary" style="margin-top:15px;"><i class="fas fa-plus-circle"></i>Tambah Keahlian</button>
+                        <div class="items-list-display" id="otherSkillsDisplayArea" style="margin-top:15px;"></div>
+                    </section>
+    
+                    <section class="profile-data-section">
+                        <h2><i class="fas fa-briefcase"></i>Preferensi Magang</h2>
+                        <div class="sub-section" style="margin-bottom: 25px;">
+                            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 10px; display:flex; align-items:center; gap: 8px;"><i class="fas fa-map-marked-alt" style="color:var(--secondary-color);"></i>Preferensi Lokasi</h3>
+                            <p class="section-subtitle" style="margin-bottom:10px;">Lokasi magang telah ditentukan oleh sistem.</p>
+                            <div class="items-list-display" id="selectedLocationsDisplay">
+                                <div class="item-tag system-defined-tag">
+                                    <span class="item-name"><i class="fas fa-map-pin" style="margin-right: 5px;"></i>Kota Palembang</span>
+                                    <span class="item-details">(Ditentukan Sistem)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-section" style="margin-bottom: 25px;">
+                            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 10px; display:flex; align-items:center; gap: 8px;"><i class="fas fa-industry" style="color:var(--secondary-color);"></i>Preferensi Bidang Industri</h3>
+                            <p class="section-subtitle" style="margin-bottom:10px;">Pilih bidang industri yang Anda tuju.</p>
+                            <div class="preference-options-container" id="predefinedIndustriesContainer">
+                                <div class="preference-option-card" data-value="Teknologi Informasi"><span class="preference-icon"><i class="fas fa-laptop-code"></i></span> Teknologi Informasi</div>
+                                <div class="preference-option-card" data-value="E-commerce"><span class="preference-icon"><i class="fas fa-shopping-cart"></i></span> E-commerce</div>
+                                <div class="preference-option-card add-other-preference-card" id="addOtherIndustryCard"><span class="preference-icon"><i class="fas fa-plus-circle"></i></span> Industri Lainnya...</div>
+                            </div>
+                            <div class="manual-input-area" id="manualIndustryArea" style="display:none;">
+                                <div class="form-group">
+                                    <label for="manualIndustryInput" style="font-size:13px;">Nama Industri Lain:</label>
+                                    <input type="text" id="manualIndustryInput" placeholder="cth: Media Kreatif">
+                                </div>
+                                <button id="addManualIndustryBtn" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> Tambah Industri</button>
+                            </div>
+                            <div class="items-list-display" id="selectedIndustriesDisplay"></div>
+                        </div>
+                        <div class="sub-section">
+                             <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 10px; display:flex; align-items:center; gap: 8px;"><i class="fas fa-user-tie" style="color:var(--secondary-color);"></i>Preferensi Jenis Pekerjaan (Opsional)</h3>
+                            <p class="section-subtitle" style="margin-bottom:10px;">Pilih jenis pekerjaan yang Anda inginkan.</p>
+                            <div class="preference-options-container" id="predefinedJobTypesContainer">
+                                <div class="preference-option-card" data-value="Backend Developer"><span class="preference-icon"><i class="fas fa-cogs"></i></span> Backend Developer</div>
+                                <div class="preference-option-card" data-value="Frontend Developer"><span class="preference-icon"><i class="fas fa-desktop"></i></span> Frontend Developer</div>
+                                <div class="preference-option-card add-other-preference-card" id="addOtherJobTypeCard"><span class="preference-icon"><i class="fas fa-plus-circle"></i></span> Jenis Lainnya...</div>
+                            </div>
+                            <div class="manual-input-area" id="manualJobTypeArea" style="display:none;">
+                                <div class="form-group">
+                                    <label for="manualJobTypeInput" style="font-size:13px;">Nama Jenis Pekerjaan Lain:</label>
+                                    <input type="text" id="manualJobTypeInput" placeholder="cth: Game Developer">
+                                </div>
+                                <button id="addManualJobTypeBtn" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> Tambah Jenis</button>
+                            </div>
+                            <div class="items-list-display" id="selectedJobTypesDisplay"></div>
+                        </div>
+                    </section>
+    
+                    <button id="saveProfileDataBtn" class="btn btn-save-all"><i class="fas fa-save"></i>Simpan Semua Data Profil</button>
+                </div>
+            </main>
+
+            <main id="page-settings" class="page-content">
+                <div class="settings-page">
+                    <h1>Pengaturan Akun</h1>
+                    <section class="settings-section">
+                        <h2>Profil Pengguna</h2>
+                        <form id="profileSettingsForm">
+                            <div class="profile-avatar-section">
+                                <img src="https://placehold.co/80x80/3498db/ffffff?text=MP" alt="Avatar Preview" class="profile-avatar-preview" id="avatarPreview">
+                                <div>
+                                    <button type="button" class="avatar-upload-btn" onclick="document.getElementById('avatarUpload').click();">Ubah Foto</button>
+                                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                                    <p class="avatar-upload-label">JPG, GIF atau PNG. Maks 5MB.</p>
+                                </div>
+                            </div>
+    
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">Nama Depan</label>
+                                    <input type="text" id="firstName" name="firstName" value="Nama">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Nama Belakang</label>
+                                    <input type="text" id="lastName" name="lastName" value="Mahasiswa">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Alamat Email</label>
+                                <input type="email" id="email" name="email" value="nama.mahasiswa@example.com" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Bio Singkat</label>
+                                <textarea id="bio" name="bio" placeholder="Ceritakan sedikit tentang diri Anda...">Mahasiswa semester akhir yang bersemangat!</textarea>
+                            </div>
+                            <button type="submit" class="btn-save-changes">Simpan Perubahan Profil</button>
+                        </form>
+                    </section>
+    
+                    <section class="settings-section">
+                        <h2>Ubah Kata Sandi</h2>
+                        <form id="changePasswordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Kata Sandi Saat Ini</label>
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">Kata Sandi Baru</label>
+                                <input type="password" id="newPassword" name="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword">Konfirmasi Kata Sandi Baru</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                            </div>
+                            <button type="submit" class="btn-save-changes">Ubah Kata Sandi</button>
+                        </form>
+                    </section>
+    
+                    <section class="settings-section">
+                        <h2>Preferensi Situs</h2>
+                        <div class="preference-item">
+                            <p>Tema Gelap</p>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="preference-item">
+                            <p>Notifikasi Email untuk Lowongan Baru</p>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="emailNotificationsToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                         <div class="preference-item">
+                            <p>Notifikasi Browser</p>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="browserNotificationsToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="languageSelect">Bahasa</label>
+                            <select id="languageSelect" name="language">
+                                <option value="id" selected>Bahasa Indonesia</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                         <button type="button" class="btn-save-changes" id="savePreferencesBtn" style="margin-top:10px;">Simpan Preferensi</button>
+                    </section>
+    
+                    <section class="settings-section">
+                        <h2>Tindakan Akun</h2>
+                         <div class="form-group">
+                            <label for="deactivateAccount">Nonaktifkan Akun</label>
+                            <p style="font-size:14px; color: var(--form-label-color); margin-bottom:10px;">Tindakan ini akan menonaktifkan akun Anda sementara. Anda dapat mengaktifkannya kembali kapan saja.</p>
+                            <button type="button" class="btn-save-changes btn-danger" id="deactivateAccountBtn">Nonaktifkan Akun Saya</button>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fas fa-plus-square"></i>Tambah Item</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="itemForm">
+                <input type="hidden" id="itemType">
+                <div class="form-group">
+                    <label for="itemName">Nama Item:</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemLevel">Tingkat Keahlian:</label>
+                    <select id="itemLevel" required>
+                        <option value="">Pilih Tingkat</option>
+                        <option value="Dasar">Dasar</option>
+                        <option value="Menengah">Menengah</option>
+                        <option value="Mahir">Mahir</option>
+                        <option value="Ahli">Ahli</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemExperience">Lama Pengalaman/Menekuni:</label>
+                    <input type="text" id="itemExperience" placeholder="cth: 1 tahun, 6 bulan">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-check-circle"></i>Simpan Item</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Global Variables & Elements ---
+            const pages = document.querySelectorAll('.page-content');
+            const navLinks = document.querySelectorAll('.navigation ul li');
+            const body = document.body;
+            const header = document.querySelector('.header');
+            const sharedUserName = document.getElementById('sharedUserName');
+            const sharedAvatarPreview = document.getElementById('sharedAvatarPreview');
+
+            // --- Theme Management (Combined from settings.html & profile_data.html) ---
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            
+            function applyTheme(theme) {
+                if (theme === 'dark-theme') {
+                    body.classList.add('dark-theme');
+                    if(darkModeToggle) darkModeToggle.checked = true;
+                } else {
+                    body.classList.remove('dark-theme');
+                    if(darkModeToggle) darkModeToggle.checked = false;
+                }
+            }
+
+            const currentTheme = localStorage.getItem('theme') || 'light-theme'; // Default to light
+            applyTheme(currentTheme);
+
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('change', function() {
+                    let newTheme = this.checked ? 'dark-theme' : 'light-theme';
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                });
+            }
+            
+            // --- Page Navigation ---
+            window.showPage = function(pageId, clickedLi) {
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                const activePage = document.getElementById(pageId);
+                if (activePage) {
+                    activePage.classList.add('active');
+                }
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                if (clickedLi) {
+                    clickedLi.classList.add('active');
+                } else { // Fallback if called without li context (e.g. initial load)
+                    const correspondingLi = document.getElementById('nav-' + pageId.replace('page-', ''));
+                    if(correspondingLi) correspondingLi.classList.add('active');
+                }
+
+                // Special handling for Swiper on home page
+                if (pageId === 'page-home' && typeof Swiper !== 'undefined' && !window.recommendationSwiperInstance) {
+                    initializeSwiper();
+                }
+            }
+            // Initial page display (Home)
+            showPage('page-home', document.getElementById('nav-home'));
+
+
+            // --- Sticky Header ---
+            if (header) {
+                // Select the correct scrollable container
+                const scrollContainer = document.querySelector('.main-content-wrapper');
+                if (scrollContainer) {
+                    scrollContainer.addEventListener('scroll', () => {
+                        if (scrollContainer.scrollTop > 20) { 
+                            header.classList.add('scrolled');
+                        } else {
+                            header.classList.remove('scrolled');
+                        }
+                    });
+                }
+            }
+
+            // --- Shared Search Bar Logic (from script.js) ---
+            const mainSearchButton = document.getElementById('mainSearchButton');
+            const mainSearchInput = document.getElementById('mainSearchInput');
+            if (mainSearchButton && mainSearchInput) {
+                mainSearchButton.addEventListener('click', function () {
+                    if(mainSearchInput.value.trim() !== '') {
+                        alert('Fungsi pencarian untuk: ' + mainSearchInput.value);
+                    }
+                });
+                mainSearchInput.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter' && mainSearchInput.value.trim() !== '') {
+                        alert('Fungsi pencarian untuk: ' + mainSearchInput.value);
+                    }
+                });
+            }
+            
+            // --- Home Page Specific JS (Swiper & Category Filter from script.js) ---
+            function initializeSwiper() {
+                if (document.querySelector('.recommendation-swiper') && typeof Swiper !== 'undefined') {
+                     if (window.recommendationSwiperInstance) {
+                        window.recommendationSwiperInstance.destroy(true, true); // Destroy existing instance if any
+                     }
+                     window.recommendationSwiperInstance = new Swiper('.recommendation-swiper', {
+                        slidesPerView: 1.2,
+                        spaceBetween: 15,
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        },
+                        breakpoints: {
+                            640: { slidesPerView: 2.2, spaceBetween: 20 },
+                            768: { slidesPerView: 2.5, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 25 },
+                            1200: { slidesPerView: 3.3, spaceBetween: 25 }
+                        },
+                        loop: false, // Set to false if you don't want infinite loop
+                        on: {
+                            slideChangeTransitionEnd: function () {
+                                // if (this.activeIndex !== 0 && this.slides.length > 1) { 
+                                    // No automatic slide back
+                                // }
+                            },
+                        }
+                    });
+                }
+            }
+            
+            if (document.getElementById('page-home').classList.contains('active')) {
+                initializeSwiper();
+            }
+
+
+            const categorySelect = document.getElementById('companyCategoryFilter');
+            const companyCards = document.querySelectorAll('#page-home .company-grid .card.card-hover-effect');
+            if (categorySelect && companyCards.length > 0) {
+                categorySelect.addEventListener('change', function () {
+                    const selectedCategory = this.value;
+                    companyCards.forEach(card => {
+                        const cardCategory = card.dataset.category;
+                        if (selectedCategory === "" || cardCategory === selectedCategory) {
+                            card.style.display = ""; // Or 'flex' if it was display:flex before
+                        } else {
+                            card.style.display = "none";
+                        }
+                    });
+                });
+            }
+
+            // --- Profile Page Specific JS (from profile_data.html) ---
+            const modal = document.getElementById('itemModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const itemForm = document.getElementById('itemForm');
+            const modalTitleEl = document.getElementById('modalTitle');
+            const itemNameInput = document.getElementById('itemName');
+            const itemLevelInput = document.getElementById('itemLevel');
+            const itemExperienceInput = document.getElementById('itemExperience');
+            const itemTypeInput = document.getElementById('itemType');
+
+            const progSkillsList = document.getElementById('programmingSkillsList');
+            const frameworksList = document.getElementById('frameworksList');
+            const toolsDisplayArea = document.getElementById('toolsDisplayArea');
+            const otherSkillsDisplayArea = document.getElementById('otherSkillsDisplayArea');
+
+            if (modal) { 
+                function openModal(type, titleText, iconClass) {
+                    itemTypeInput.value = type;
+                    modalTitleEl.innerHTML = `<i class="${iconClass}"></i> ${titleText}`;
+                    itemForm.reset();
+                    modal.style.display = 'block';
+                    setTimeout(() => {
+                        modal.querySelector('.modal-content').style.opacity = 1;
+                        modal.querySelector('.modal-content').style.transform = 'translateY(0) scale(1)';
+                    }, 10);
+                    if(itemNameInput) itemNameInput.focus();
+                }
+
+                function closeModal() {
+                    modal.querySelector('.modal-content').style.opacity = 0;
+                    modal.querySelector('.modal-content').style.transform = 'translateY(-50px) scale(0.95)';
+                    setTimeout(() => {
+                         modal.style.display = 'none';
+                    }, 300);
+                }
+
+                if(closeModalBtn) closeModalBtn.onclick = closeModal;
+                window.onclick = (event) => {
+                    if (event.target == modal) closeModal();
+                }
+
+                const addProgSkillBtn = document.getElementById('addProgSkillBtn');
+                if(addProgSkillBtn) addProgSkillBtn.onclick = () => openModal('progSkill', 'Tambah Bahasa Pemrograman', 'fas fa-code');
+                
+                const addFrameworkBtn = document.getElementById('addFrameworkBtn');
+                if(addFrameworkBtn) addFrameworkBtn.onclick = () => openModal('framework', 'Tambah Framework', 'fas fa-cubes');
+
+                if(itemForm) {
+                    itemForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const name = itemNameInput.value.trim();
+                        const level = itemLevelInput.value;
+                        const experience = itemExperienceInput.value.trim();
+                        const type = itemTypeInput.value;
+
+                        if (!name || !level) {
+                            alert('Nama dan Tingkat Keahlian harus diisi!'); 
+                            return;
+                        }
+
+                        let displayList;
+                        if (type === 'progSkill') displayList = progSkillsList;
+                        else if (type === 'framework') displayList = frameworksList;
+
+                        if (displayList) {
+                            addItemToDisplay(displayList, name, `Level: ${level}, Pengalaman: ${experience || 'N/A'}`, null);
+                        }
+                        closeModal();
+                    });
+                }
+            }
+
+            function addItemToDisplay(listElement, name, details, predefinedCardContainerElement = null) {
+                 if (!listElement || Array.from(listElement.children).some(child => child.querySelector('.item-name') && child.querySelector('.item-name').textContent.toLowerCase() === name.toLowerCase())) {
+                    return;
+                }
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item-tag'; 
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'item-name';
+                nameSpan.textContent = name;
+                itemDiv.appendChild(nameSpan);
+
+                if (details) {
+                    const detailsSpan = document.createElement('span');
+                    detailsSpan.className = 'item-details';
+                    detailsSpan.textContent = `(${details})`;
+                    itemDiv.appendChild(detailsSpan);
+                }
+                
+                const removeBtn = document.createElement('button'); 
+                removeBtn.className = 'remove-item';
+                removeBtn.setAttribute('aria-label', 'Hapus ' + name);
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.onclick = () => {
+                    itemDiv.style.transform = 'scale(0.8)';
+                    itemDiv.style.opacity = 0;
+                    setTimeout(() => {
+                        itemDiv.remove();
+                        if (predefinedCardContainerElement) {
+                            Array.from(predefinedCardContainerElement.querySelectorAll('.preference-option-card.active, .skill-option-card.active')).forEach(activeCard => {
+                                if (activeCard.dataset.value.toLowerCase() === name.toLowerCase()) {
+                                    activeCard.classList.remove('active');
+                                }
+                            });
+                        }
+                    }, 200);
+                };
+                itemDiv.appendChild(removeBtn);
+                
+                listElement.appendChild(itemDiv);
+                
+                setTimeout(() => {
+                    itemDiv.style.transform = 'scale(1)';
+                    itemDiv.style.opacity = 1;
+                }, 10);
+                itemDiv.style.transform = 'scale(0.9)';
+                itemDiv.style.opacity = 0;
+                itemDiv.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+            }
+
+            const toolsInput = document.getElementById('toolsInput');
+            const addToolsBtn = document.getElementById('addToolsBtn');
+            if (addToolsBtn && toolsInput && toolsDisplayArea) {
+                addToolsBtn.onclick = function() {
+                    const tools = toolsInput.value.trim().split(',')
+                        .map(tool => tool.trim())
+                        .filter(tool => tool !== "");
+                    
+                    tools.forEach(toolName => {
+                         addItemToDisplay(toolsDisplayArea, toolName, null);
+                    });
+                    toolsInput.value = '';
+                };
+            }
+            
+            const predefinedSkillCards = document.querySelectorAll('#predefinedOtherSkills .skill-option-card');
+            if (predefinedSkillCards.length > 0) {
+                predefinedSkillCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        this.classList.toggle('active');
+                    });
+                });
+            }
+
+            const addOtherSkillBtn = document.getElementById('addOtherSkillBtn');
+            const otherSkillManualNameInput = document.getElementById('otherSkillManualName');
+            const otherSkillManualDescInput = document.getElementById('otherSkillManualDesc');
+
+            if (addOtherSkillBtn && otherSkillsDisplayArea && otherSkillManualNameInput && otherSkillManualDescInput) {
+                addOtherSkillBtn.onclick = function() {
+                    predefinedSkillCards.forEach(card => {
+                        if (card.classList.contains('active')) {
+                            const skillValue = card.dataset.value;
+                            addItemToDisplay(otherSkillsDisplayArea, skillValue, 'Dipilih dari daftar', document.getElementById('predefinedOtherSkills'));
+                            card.classList.remove('active');
+                        }
+                    });
+
+                    const manualSkillName = otherSkillManualNameInput.value.trim();
+                    const manualSkillDesc = otherSkillManualDescInput.value.trim();
+
+                    if (manualSkillName) {
+                         addItemToDisplay(otherSkillsDisplayArea, manualSkillName, manualSkillDesc || 'Deskripsi tidak ada', document.getElementById('predefinedOtherSkills'));
+                    }
+                    otherSkillManualNameInput.value = '';
+                    otherSkillManualDescInput.value = '';
+                };
+            }
+
+            function setupPreferenceSection(config) {
+                const predefinedContainer = document.getElementById(config.predefinedContainerId);
+                const addOtherCard = document.getElementById(config.addOtherCardId);
+                const manualArea = document.getElementById(config.manualAreaId);
+                const manualInput = document.getElementById(config.manualInputId);
+                const addManualBtn = document.getElementById(config.addManualBtnId);
+                const displayArea = document.getElementById(config.displayAreaId);
+
+                if (!predefinedContainer || !addOtherCard || !manualArea || !manualInput || !addManualBtn || !displayArea) {
+                    return;
+                }
+
+                predefinedContainer.addEventListener('click', function(event) {
+                    const card = event.target.closest('.preference-option-card:not(.add-other-preference-card)');
+                    if (card) {
+                        const value = card.dataset.value;
+                        const wasActive = card.classList.contains('active');
+                        card.classList.toggle('active');
+                        if (!wasActive) {
+                             addItemToDisplay(displayArea, value, config.itemDetailSourcePilihan || 'Pilihan', predefinedContainer);
+                        } else {
+                            const tagToRemove = Array.from(displayArea.children).find(child => child.querySelector('.item-name') && child.querySelector('.item-name').textContent.toLowerCase() === value.toLowerCase());
+                            if (tagToRemove) tagToRemove.remove();
+                        }
+                    }
+                });
+                addOtherCard.addEventListener('click', function() {
+                    manualArea.style.display = manualArea.style.display === 'none' ? 'block' : 'none';
+                    if (manualArea.style.display === 'block' && manualInput) manualInput.focus();
+                });
+                addManualBtn.addEventListener('click', function() {
+                    const value = manualInput.value.trim();
+                    if (value) {
+                        addItemToDisplay(displayArea, value, config.itemDetailSourceManual || 'Manual', predefinedContainer);
+                        manualInput.value = '';
+                        Array.from(predefinedContainer.querySelectorAll('.preference-option-card:not(.add-other-preference-card):not(.active)')).forEach(pCard => {
+                            if (pCard.dataset.value.toLowerCase() === value.toLowerCase()) pCard.classList.add('active');
+                        });
+                    }
+                });
+            }
+            
+             if (document.getElementById('predefinedIndustriesContainer')) {
+                setupPreferenceSection({
+                    predefinedContainerId: 'predefinedIndustriesContainer', addOtherCardId: 'addOtherIndustryCard',
+                    manualAreaId: 'manualIndustryArea', manualInputId: 'manualIndustryInput',
+                    addManualBtnId: 'addManualIndustryBtn', displayAreaId: 'selectedIndustriesDisplay',
+                    itemDetailSourcePilihan: 'Pilihan Industri', itemDetailSourceManual: 'Industri Manual'
+                });
+            }
+            if (document.getElementById('predefinedJobTypesContainer')) {
+                setupPreferenceSection({
+                    predefinedContainerId: 'predefinedJobTypesContainer', addOtherCardId: 'addOtherJobTypeCard',
+                    manualAreaId: 'manualJobTypeArea', manualInputId: 'manualJobTypeInput',
+                    addManualBtnId: 'addManualJobTypeBtn', displayAreaId: 'selectedJobTypesDisplay',
+                    itemDetailSourcePilihan: 'Pilihan Jenis', itemDetailSourceManual: 'Jenis Manual'
+                });
+            }
+            
+            const saveProfileDataBtn = document.getElementById('saveProfileDataBtn');
+            if(saveProfileDataBtn) {
+                saveProfileDataBtn.onclick = function() {
+                    alert('Data profil disimpan (prototipe)! Implementasi backend diperlukan.');
+                };
+            }
+
+            // --- Settings Page Specific JS (from settings.html) ---
+            const avatarUpload = document.getElementById('avatarUpload');
+            const avatarPreview = document.getElementById('avatarPreview'); 
+            const settingsFirstNameInput = document.getElementById('firstName'); // Scoped to settings
+            const settingsLastNameInput = document.getElementById('lastName'); // Scoped to settings
+
+
+            if (avatarUpload && avatarPreview) {
+                avatarUpload.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            avatarPreview.src = e.target.result;
+                            if(sharedAvatarPreview) sharedAvatarPreview.src = e.target.result; 
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+            
+            const profileSettingsForm = document.getElementById('profileSettingsForm');
+            if (profileSettingsForm && settingsFirstNameInput && settingsLastNameInput) {
+                profileSettingsForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const firstName = settingsFirstNameInput.value;
+                    const lastName = settingsLastNameInput.value;
+                    if(sharedUserName) sharedUserName.textContent = `${firstName} ${lastName}`;
+                    alert('Perubahan profil disimpan (prototipe)!');
+                });
+            }
+
+            const changePasswordForm = document.getElementById('changePasswordForm');
+            if (changePasswordForm) {
+                changePasswordForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Kata sandi diubah (prototipe)!');
+                });
+            }
+            
+            const savePreferencesBtn = document.getElementById('savePreferencesBtn');
+            if(savePreferencesBtn){
+                savePreferencesBtn.addEventListener('click', function(){
+                    alert('Preferensi disimpan (prototipe)!');
+                });
+            }
+            
+            const deactivateAccountBtn = document.getElementById('deactivateAccountBtn');
+            if(deactivateAccountBtn) {
+                deactivateAccountBtn.addEventListener('click', function(e) {
+                     if(confirm("Apakah Anda yakin ingin menonaktifkan akun Anda?")){
+                         alert('Akun dinonaktifkan (prototipe)!');
+                     }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
