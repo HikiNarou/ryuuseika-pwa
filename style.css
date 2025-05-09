@@ -1,0 +1,583 @@
+/* Basic Reset dari CSS Anda */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling dasar dari proyek kita, dengan tambahan font dari CSS Anda */
+body {
+    font-family: 'Roboto', 'Open Sans', sans-serif; /* Roboto sebagai utama, Open Sans fallback */
+    background-color: #f4f7f6; /* Background utama dari layout kita */
+    color: #333;
+    display: flex;
+    min-height: 100vh; /* Dari CSS Anda, display:flex dari kita */
+}
+
+/* Global link style dari CSS Anda. Hati-hati karena ini akan mempengaruhi SEMUA link. */
+/* Jika tidak ingin global, hapus atau buat lebih spesifik, misal: .card-info a */
+body a {
+    text-decoration: none;
+    color: #172b4d;
+}
+
+
+/* --- STYLING YANG SUDAH ADA UNTUK LAYOUT UTAMA --- */
+/* Sidebar, Main Content, Header, dll. dari style.css sebelumnya */
+.container {
+    display: flex;
+    width: 100%;
+    /* height: 100vh; Dihapus karena body sudah min-height */
+}
+
+.sidebar {
+    width: 100px;
+    background-color: #ffffff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.logo {
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 60px; /* Sesuaikan dengan ukuran logo Anda */
+    height: 60px;
+    /* border-radius: 10px; Jika logo Anda kotak dengan sudut */
+}
+
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.navigation ul li a {
+    /* text-decoration: none; sudah di body a */
+    color: #7f8c8d; /* Warna ikon navigasi awal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navigation ul li .icon {
+    font-size: 24px;
+}
+
+.navigation ul li.active a {
+    background-color: #3498db;
+    color: #ffffff !important; /* Pastikan warna ikon aktif putih */
+}
+.navigation ul li a:hover {
+    background-color: #ecf0f1;
+    color: #3498db;
+}
+
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px 30px;
+    margin-left: 100px; /* Lebar sidebar */
+    overflow-y: auto;
+    background-color: #f9fafb; /* Warna latar konten */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+}
+
+.user-profile span {
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.notification-icon {
+    font-size: 24px;
+    color: #555;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 5px 5px 5px 15px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    font-size: 14px;
+    background-color: transparent;
+    min-width: 200px;
+}
+
+.search-bar .search-button {
+    background-color: #f0f0f0; /* Atau transparent jika ingin hanya ikon */
+    border: none;
+    color: #555;
+    padding: 8px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+/* Rekomendasi Magang (Swiper) - Styling tetap dari sebelumnya */
+.internship-recommendations {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.internship-recommendations h2,
+.explore-companies h2 { /* Judul section konsisten */
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #172b4d; /* Menggunakan warna dari CSS baru untuk judul section */
+    font-family: 'Roboto', 'Song Myung', serif; /* Menggunakan Roboto, fallback Song Myung */
+    font-weight: bold;
+}
+
+.recommendation-swiper {
+    width: 100%;
+    padding-bottom: 40px; /* Ruang untuk pagination */
+}
+
+/* Kartu untuk Swiper, bedakan dari .card untuk hover effect */
+.recommendation-card.swiper-slide {
+    background-color: #ffffff; /* Fallback */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Konten ke bawah */
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+.recommendation-card.swiper-slide:hover {
+    transform: scale(1.02);
+}
+
+.recommendation-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 70%);
+    border-radius: 15px; /* Match card's border-radius */
+    z-index: 1;
+}
+
+.recommendation-card .card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.recommendation-card h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.recommendation-card .card-subtitle {
+    font-size: 14px;
+    color: #f0f0f0;
+    margin-bottom: 10px;
+}
+
+.recommendation-card .card-description {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.btn-detail { /* Tombol detail umum */
+    background-color: #f1c40f;
+    color: #2c3e50 !important; /* Warna teks tombol agar kontras, !important jika perlu */
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500; /* Tidak terlalu bold */
+    font-size: 13px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-start;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: none; /* Tidak uppercase */
+}
+
+.btn-detail:hover {
+    background-color: #e0b30b;
+    transform: scale(1.03);
+}
+
+.recommendation-swiper .swiper-pagination-bullet {
+    background-color: #bdc3c7;
+    opacity: 0.8;
+}
+.recommendation-swiper .swiper-pagination-bullet-active {
+    background-color: #7f8c8d;
+    opacity: 1;
+}
+
+/* --- STYLING UNTUK "JELAJAHI PERUSAHAAN LAINNYA" DENGAN EFEK HOVER BARU --- */
+.explore-companies {
+    margin-bottom: 30px;
+}
+
+.explore-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+/* Judul section .explore-companies h2 sudah di-style bersama .internship-recommendations h2 */
+
+.category-filter select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+/* Variabel dari CSS Anda */
+:root {
+    /* font-size: 16px; sudah ada by default */
+    --card-img-height: 200px;
+}
+
+/* Menggunakan .company-grid sebagai .card-container */
+.company-grid {
+    width: 100%;
+    /* height: 100vh; Tidak diperlukan, biarkan section yg mengatur tinggi */
+    display: grid; /* Menggunakan grid untuk layout responsif */
+    grid-template-columns: repeat(4, 1fr); /* Mengatur agar ada 4 kolom yang sama lebarnya */
+    gap: 20px; /* Jarak antar kartu disesuaikan agar tidak terlalu jauh/dekat untuk 4 kolom */
+    /* justify-content: center; align-items: center; Sudah dihandle oleh grid */
+    justify-items: center; /* Tambahkan ini untuk menengahkan item dalam track gridnya */
+    transition: all 200ms ease-in-out; /* Dari CSS Anda */
+}
+
+/* Kelas .card dari CSS Anda, dengan tambahan .card-hover-effect untuk scoping */
+.card.card-hover-effect {
+    align-self: start; /* Ganti flex-start menjadi start untuk grid */
+    position: relative;
+    width: 100%; /* Tambahkan ini agar kartu responsif di dalam cell grid */
+    max-width: 325px; /* Tambahkan ini untuk membatasi lebar maksimum kartu */
+    /* min-width: 275px; Sudah di grid-template-columns */
+    /* margin: 1.25rem 0.75rem; Dihandle oleh 'gap' pada .company-grid */
+    background: white;
+    transition: all 300ms ease-in-out;
+    border-radius: 8px; /* Sedikit border-radius untuk kartu */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Shadow awal yang subtle */
+}
+
+.card.card-hover-effect .card-img { /* Selalu hidden berdasarkan CSS Anda */
+    visibility: hidden;
+    width: 100%;
+    height: var(--card-img-height);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card.card-hover-effect .card-link { /* Wrapper untuk .card-img-hovered agar bisa diklik */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Defaultnya setinggi kartu, akan disesuaikan saat hover */
+    z-index: 1; /* Di atas .card-img, di bawah .card-info saat tidak hover */
+}
+
+.card.card-hover-effect .card-img-hovered {
+    --card-img-hovered-overlay: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0)
+    );
+    transition: all 350ms ease-in-out;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: var(--card-img-height); /* Awalnya setinggi gambar */
+    /* position: absolute; Sudah dihandle oleh .card-link */
+    /* top: 0; left: 0; Sudah dihandle oleh .card-link */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    /* z-index: dihapus, .card-link yg mengatur z-index */
+}
+
+.card.card-hover-effect .card-info {
+    position: relative; /* Agar z-index bekerja */
+    padding: 0.75rem 1.25rem;
+    transition: all 200ms ease-in-out;
+    background-color: #fff; /* Latar info awal */
+    border-bottom-left-radius: 8px; /* Untuk sudut bawah kartu */
+    border-bottom-right-radius: 8px;
+    z-index: 2; /* Di atas .card-link / .card-img-hovered */
+}
+
+.card.card-hover-effect .card-info .card-about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0; /* Padding disesuaikan */
+    transition: all 200ms ease-in-out;
+}
+
+.card.card-hover-effect .card-tag {
+    /* width: 60px; Biarkan auto */
+    padding: 0.2rem 0.6rem;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px; /* Spasi huruf disesuaikan */
+    background: #505f79;
+    color: #fff !important; /* Pastikan warna teks tag putih */
+    border-radius: 4px;
+    /* text-decoration: none; sudah dari body a */
+}
+.card.card-hover-effect .card-tag.tag-news { background: #36b37e; }
+.card.card-hover-effect .card-tag.tag-deals { background: #ffab00; }
+.card.card-hover-effect .card-tag.tag-politics { /*width: 71px;*/ background: #ff5630; }
+
+.card.card-hover-effect .card-time { /* Dari HTML Anda, stylingnya */
+    font-size: 11px;
+    color: #7f8c8d;
+}
+
+.card.card-hover-effect .card-title {
+    /* z-index: 10; Tidak perlu, .card-info sudah punya z-index */
+    font-family: 'Roboto', 'Song Myung', serif; /* Konsisten dengan judul section */
+    font-size: 1.2rem; /* Ukuran judul kartu */
+    font-weight: 500; /* Ketebalan judul */
+    padding-bottom: 0.5rem;
+    margin-top: 0.25rem; /* Sedikit jarak dari .card-about */
+    transition: all 350ms ease-in-out;
+    color: #172b4d; /* Warna judul awal */
+}
+
+.card.card-hover-effect .card-creator {
+    font-size: 0.85rem; /* Ukuran font deskripsi */
+    padding-bottom: 0.75rem;
+    transition: all 250ms ease-in-out;
+    color: #505f79; /* Warna teks deskripsi */
+    line-height: 1.5;
+}
+.card.card-hover-effect .card-creator a { /* Link di dalam creator jika ada */
+    color: #3498db; /* Warna link spesifik untuk creator */
+    font-weight: 500;
+}
+.card.card-hover-effect .card-creator a:hover {
+    text-decoration: underline;
+}
+
+/* Tombol detail spesifik untuk kartu explore */
+.card.card-hover-effect .explore-btn-detail {
+    margin-top: 0.5rem; /* Jarak dari creator */
+    align-self: flex-start; /* Rata kiri */
+}
+
+
+/* EFEK HOVER DARI CSS ANDA */
+.card.card-hover-effect:hover {
+    cursor: pointer;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08), /* Disesuaikan sedikit */
+                0px 5px 10px rgba(0, 0, 0, 0.05);
+    transform: scale(1.025);
+}
+
+.card.card-hover-effect:hover .card-img-hovered {
+    --card-img-hovered-overlay: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 30%, /* Mulai overlay lebih bawah */
+        rgba(0, 0, 0, 0.75) /* Overlay lebih pekat */
+    );
+    height: 100%; /* Gambar mengisi seluruh kartu */
+    border-radius: 8px; /* Semua sudut jadi bulat */
+}
+
+.card.card-hover-effect:hover .card-about,
+.card.card-hover-effect:hover .card-creator,
+.card.card-hover-effect:hover .explore-btn-detail { /* Tombol juga disembunyikan */
+    opacity: 0;
+    transition-delay: 0s; /* Sembunyikan langsung */
+}
+
+.card.card-hover-effect:hover .card-info {
+    background-color: transparent;
+    /* Pindahkan padding ke sini agar judul tidak terpotong jika terlalu panjang */
+    padding: 1rem 1.25rem; /* Padding saat hover */
+}
+
+.card.card-hover-effect:hover .card-title {
+    color: #fff; /* Warna teks judul saat hover (lebih kontras di atas gambar gelap) */
+    position: absolute;
+    bottom: 1.25rem; /* Jarak dari bawah kartu */
+    left: 1.25rem; /* Jarak dari kiri kartu */
+    right: 1.25rem; /* Agar tidak overflow */
+    transform: none; /* Hapus transform aneh, biarkan di posisi bawah */
+    padding-bottom: 0; /* Hapus padding bawah saat hover */
+    /* font-size: 1.3rem; Sedikit lebih besar saat hover jika mau */
+    transition: color 0.3s ease-out 0.1s, transform 0.3s ease-out 0.1s; /* Transisi warna dan transform (jika ada) dengan delay */
+}
+
+
+/* CARD IMAGES DARI CSS ANDA (GANTI DENGAN GAMBAR PERUSAHAAN) */
+/* Menggunakan placeholder yang lebih netral dan menunjukkan nama */
+.card-1 .card-img,
+.card-1 .card-img-hovered {
+    background-image: var(--card-img-hovered-overlay),
+        url('https://placehold.co/325x200/A9CCE3/2C3E50?text=Anjas+Sejati&font=Roboto');
+}
+
+.card-2 .card-img,
+.card-2 .card-img-hovered {
+    background-image: var(--card-img-hovered-overlay),
+        url('https://placehold.co/325x200/A2D9CE/1E8449?text=Maju+Bersama&font=Roboto');
+}
+
+.card-3 .card-img,
+.card-3 .card-img-hovered {
+    background-image: var(--card-img-hovered-overlay),
+        url('https://placehold.co/325x200/F5B7B1/922B21?text=Cipta+Karya&font=Roboto');
+}
+/* Tambahkan .card-4 dst. jika perlu */
+
+
+/* RESPONSIVE (Ambil dari style.css sebelumnya dan sesuaikan) */
+@media (max-width: 1200px) {
+    .recommendation-card.swiper-slide { height: 200px; }
+    .recommendation-card h3 { font-size: 20px; }
+    .recommendation-card .card-subtitle { font-size: 14px; }
+}
+
+@media (max-width: 768px) {
+    .sidebar { width: 70px; }
+    .main-content { margin-left: 70px; padding: 15px; }
+    .logo img { width: 50px; height: 50px; }
+    .navigation ul li .icon { font-size: 20px; }
+    .navigation ul li a { width: 45px; height: 45px; }
+
+    .header { flex-direction: column; align-items: stretch; padding: 10px 15px; }
+    .user-profile { margin-bottom: 10px; }
+    .search-bar { width: 100%; }
+    .search-bar input { flex-grow: 1; }
+
+    .recommendation-card.swiper-slide { height: 190px; border-radius: 10px; }
+    .recommendation-card h3 { font-size: 18px; }
+    .recommendation-card .card-description { -webkit-line-clamp: 2; height: auto; }
+
+    .explore-header { flex-direction: column; align-items: stretch; }
+    .explore-header h2 { margin-bottom: 10px; }
+    .category-filter { width: 100%; margin-bottom: 15px; }
+    .category-filter select { width: 100%; }
+
+    /* Penyesuaian kartu explore di mobile */
+    .company-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kartu lebih kecil */
+        gap: 20px;
+    }
+    :root { --card-img-height: 180px; } /* Tinggi gambar kartu lebih kecil di mobile */
+    .card.card-hover-effect .card-title { font-size: 1.1rem; }
+    .card.card-hover-effect .card-creator { font-size: 0.8rem; }
+    .card.card-hover-effect .explore-btn-detail { font-size: 0.8rem; padding: 8px 12px; }
+
+    .card.card-hover-effect:hover .card-title {
+        /* Penyesuaian posisi judul saat hover di mobile jika perlu */
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar { display: none; }
+    .main-content { margin-left: 0; padding:10px; }
+    .header { padding: 10px; }
+    .user-profile span { font-size: 14px; }
+
+    .internship-recommendations h2, .explore-companies h2 { font-size: 18px; }
+    .btn-detail { padding: 8px 12px; font-size: 12px; } /* Tombol lebih kecil */
+
+    .recommendation-card.swiper-slide { height: 180px; }
+    .recommendation-card h3 { font-size: 16px; }
+
+    .company-grid { grid-template-columns: 1fr; } /* Satu kartu per baris */
+    :root { --card-img-height: 170px; }
+    .card.card-hover-effect .card-title { font-size: 1rem; }
+}
