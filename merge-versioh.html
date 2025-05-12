@@ -343,7 +343,7 @@
         /* --- Styles from style.css (for Home Page) --- */
         .internship-recommendations {
             margin-bottom: 40px;
-            position: relative;
+            position: relative; /* Needed for absolute positioning of nav buttons */
         }
         .internship-recommendations h2,
         .explore-companies h2 {
@@ -353,49 +353,123 @@
             font-family: 'Roboto', 'Song Myung', serif;
             font-weight: bold;
         }
-        .recommendation-swiper {
+        .recommendation-swiper-container { /* Renamed for clarity */
             width: 100%;
-            padding-bottom: 40px;
+            padding-bottom: 50px; /* Increased padding for pagination and nav */
+            position: relative; /* For nav buttons */
         }
         .recommendation-card.swiper-slide {
-            background-color: #ffffff;
+            background-color: var(--card-bg); /* Use theme variable */
             border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow-color);
+            box-shadow: 0 8px 20px var(--shadow-color); /* Slightly enhanced shadow */
             overflow: hidden;
             position: relative;
-            height: 220px;
+            height: 240px; /* Slightly taller */
             background-size: cover;
             background-position: center;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 20px;
-            transition: transform 0.3s ease;
+            padding: 25px; /* Increased padding */
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
         }
-        .recommendation-card.swiper-slide:hover { transform: scale(1.02); }
+         .dark-theme .recommendation-card.swiper-slide {
+            /* Specific dark theme adjustments if needed, though var(--card-bg) should handle it */
+        }
+        .recommendation-card.swiper-slide:hover { 
+            transform: translateY(-5px); /* Subtle hover, coverflow has its own transform */
+            box-shadow: 0 10px 22px color-mix(in srgb, var(--primary-color) 25%, transparent);
+        }
         .recommendation-card .card-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 70%);
+            background: linear-gradient(to top, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.05) 65%); /* Adjusted gradient */
             border-radius: 15px; z-index: 1;
+            transition: background 0.3s ease;
+        }
+        .recommendation-card:hover .card-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 25%, rgba(0,0,0,0) 70%);
         }
         .recommendation-card .card-content { position: relative; z-index: 2; }
-        .recommendation-card h3 { font-size: 22px; font-weight: bold; margin-bottom: 5px; color: #ffffff; font-family: 'Roboto', sans-serif; }
-        .recommendation-card .card-subtitle { font-size: 14px; color: #f0f0f0; margin-bottom: 10px; }
+        .recommendation-card h3 { 
+            font-size: 22px; /* Adjusted title size */
+            font-weight: bold; margin-bottom: 8px; color: #ffffff; 
+            font-family: 'Poppins', sans-serif; /* Consistent font */
+        }
+        .recommendation-card .card-subtitle { font-size: 14px; color: #e0e0e0; margin-bottom: 10px; font-weight: 500;}
         .recommendation-card .card-description {
-            font-size: 13px; line-height: 1.5; color: #e0e0e0; margin-bottom: 15px;
+            font-size: 13px; line-height: 1.5; color: #d0d0d0; margin-bottom: 18px;
             height: 40px; overflow: hidden; text-overflow: ellipsis;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
         }
-        .btn-detail {
-            background-color: #f1c40f; color: #2c3e50 !important; border: none;
-            padding: 10px 18px; border-radius: 20px; cursor: pointer;
-            font-weight: 500; font-size: 13px; transition: background-color 0.3s ease, transform 0.3s ease;
-            align-self: flex-start; text-decoration: none; display: inline-block; text-transform: none;
+        .btn-detail { /* Enhanced button style */
+            background-color: var(--primary-color); 
+            color: #ffffff !important; 
+            border: none;
+            padding: 10px 20px; /* Slightly smaller padding */
+            border-radius: 20px; 
+            cursor: pointer;
+            font-weight: 500; font-size: 13px; /* Slightly smaller font */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            align-self: flex-start; text-decoration: none; display: inline-flex; 
+            align-items: center; gap: 6px; /* Smaller gap */
+            text-transform: none;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
-        .btn-detail:hover { background-color: #e0b30b; transform: scale(1.03); }
-        .recommendation-swiper .swiper-pagination-bullet { background-color: #bdc3c7; opacity: 0.8; }
-        .recommendation-swiper .swiper-pagination-bullet-active { background-color: #7f8c8d; opacity: 1; }
+        .btn-detail:hover { 
+            background-color: var(--primary-hover-color); 
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 12px color-mix(in srgb, var(--primary-color) 25%, transparent);
+        }
+        .btn-detail .fas { font-size: 0.9em; } /* Icon size relative to button text */
+
+        .recommendation-swiper-container .swiper-pagination-bullet { 
+            background-color: var(--text-muted-light); opacity: 0.7; 
+            width: 9px; height: 9px; 
+        }
+        .recommendation-swiper-container .swiper-pagination-bullet-active { 
+            background-color: var(--primary-color); opacity: 1; 
+        }
+        .dark-theme .recommendation-swiper-container .swiper-pagination-bullet {
+            background-color: var(--text-muted-dark);
+        }
+         .dark-theme .recommendation-swiper-container .swiper-pagination-bullet-active {
+            background-color: var(--primary-color);
+        }
+
+        /* Swiper Navigation Buttons */
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-color); 
+            background-color: var(--card-bg); /* Match card background for better integration */
+            border-radius: 50%;
+            width: 38px; /* Slightly smaller */
+            height: 38px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+            top: 50%; /* Vertically center */
+            transform: translateY(-50%); /* Adjust for precise centering */
+        }
+        .swiper-button-next { right: 10px; } /* Adjust position */
+        .swiper-button-prev { left: 10px; } /* Adjust position */
+
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.05); /* Maintain centering on scale */
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 16px; 
+            font-weight: bold;
+        }
+        .dark-theme .swiper-button-next, .dark-theme .swiper-button-prev {
+            background-color: var(--card-bg-dark);
+            color: var(--primary-color);
+        }
+        .dark-theme .swiper-button-next:hover, .dark-theme .swiper-button-prev:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg-dark); /* Ensure contrast */
+        }
+
 
         .explore-companies { margin-bottom: 30px; }
         .explore-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
@@ -410,22 +484,14 @@
              color: var(--text-color-dark);
         }
 
-        /* Updated styles for company-grid to enable horizontal scroll and 4 cards per row */
+        /* Updated styles for company-grid to use CSS Grid and be responsive */
         .company-grid {
-            display: flex;       /* Enable flexbox layout */
-            overflow-x: auto;    /* Allow horizontal scrolling */
-            overflow-y: hidden;  /* Prevent vertical scroll within this container */
-            padding-bottom: 20px;/* Space for scrollbar if it appears outside */
-            gap: 25px;           /* Space between cards */
-            /* transition: all 200ms ease-in-out; /* Kept from original style.css */
+            display: grid;
+            gap: 25px; /* Space between cards */
+            grid-template-columns: repeat(4, 1fr); /* Default: 4 cards per row */
         }
 
         .card.card-hover-effect {
-            flex: 0 0 auto; /* Prevent cards from shrinking or growing */
-            width: calc(25% - 18.75px); /* Aim for 4 cards: 100%/4 = 25%. Gap adjustment: (25px * 3 gaps) / 4 cards */
-            max-width: 325px; /* Original max-width from style.css */
-            min-width: 280px; /* Prevent cards from becoming too small, can be adjusted */
-            /* align-self, position, background, transition, border-radius, box-shadow, overflow are from original .card.card-hover-effect */
             align-self: start; 
             position: relative; 
             background: var(--card-bg); 
@@ -435,25 +501,27 @@
             overflow: hidden; 
         }
 
-        /* Responsive adjustments for horizontally scrolling .company-grid */
-        @media (max-width: 1350px) { /* Adjust breakpoint for 3 cards to be comfortable */
-            .card.card-hover-effect {
-                width: calc(33.333% - 16.67px); /* Aim for 3 cards. Gap adjustment: (25px * 2 gaps) / 3 cards */
-                min-width: 260px;
+        /* Responsive adjustments for .company-grid */
+        @media (max-width: 1200px) { /* Large tablets / Small desktops */
+            .company-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
             }
         }
-
-        @media (max-width: 992px) { /* Tablet - Aim for 2 cards */
-            .card.card-hover-effect {
-                width: calc(50% - 12.5px); /* Aim for 2 cards. Gap adjustment: (25px * 1 gap) / 2 cards */
-                min-width: 250px;
+        @media (max-width: 992px) { /* Tablets */
+            .company-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
             }
         }
-
-        @media (max-width: 600px) { /* Mobile - Aim for 1.x cards visible to hint scrolling */
-            .card.card-hover-effect {
-                width: 75%; /* Show 1 card and a bit of the next to hint at scrollability */
-                min-width: 240px; /* Ensure it's not too narrow */
+        @media (max-width: 768px) { /* Small Tablets / Large Mobile */
+             .company-grid {
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 20px;
+            }
+        }
+        @media (max-width: 576px) { /* Mobile */
+            .company-grid {
+                grid-template-columns: 1fr; /* 1 card per row */
+                gap: 15px;
             }
         }
         /* End of updated styles for company-grid */
@@ -835,9 +903,6 @@
 
         /* Responsive adjustments (Combined and refined) */
         @media (max-width: 992px) { /* Tablet */
-            /* .search-bar input { min-width: 150px; } /* Already handled by .company-grid specific responsive */
-            /* .company-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; } /* Covered by new flex scroll */
-             /* :root { --card-img-height: 190px; } /* This global override might be too broad, handled by card specific media queries if needed */
         }
 
         @media (max-width: 768px) { /* Mobile landscape / Small Tablet */
@@ -877,16 +942,13 @@
             .profile-avatar-section { flex-direction: column; align-items: flex-start; }
             .profile-avatar-preview { margin-bottom: 10px; }
 
-            .recommendation-card.swiper-slide { height: 190px; border-radius: 10px; }
-            .recommendation-card h3 { font-size: 18px; }
+            .recommendation-card.swiper-slide { height: 220px; border-radius: 12px; padding: 20px;} /* Adjusted for mobile */
+            .recommendation-card h3 { font-size: 20px; }
             .recommendation-card .card-description { -webkit-line-clamp: 2; height: auto; }
             .explore-header { flex-direction: column; align-items: stretch; }
             .explore-header h2 { margin-bottom: 10px; }
             .category-filter { width: 100%; margin-bottom: 15px; }
             .category-filter select { width: 100%; }
-            /* .company-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } /* Covered by new flex scroll */
-            /* :root { --card-img-height: 180px; } */
-            /* .card.card-hover-effect .card-title { font-size: 1.1rem; } /* Covered by new flex scroll */
         }
 
         @media (max-width: 480px) { /* Mobile portrait */
@@ -902,12 +964,10 @@
             .btn-save-changes, .btn-save-all { width: 100%; text-align: center; font-size: 14px; padding: 10px 20px; }
             
             .internship-recommendations h2, .explore-companies h2 { font-size: 18px; }
-            .btn-detail { padding: 8px 12px; font-size: 12px; }
-            .recommendation-card.swiper-slide { height: 180px; }
-            .recommendation-card h3 { font-size: 16px; }
-            /* .company-grid { grid-template-columns: 1fr; } /* Covered by new flex scroll */
-            /* :root { --card-img-height: 170px; } */
-            /* .card.card-hover-effect .card-title { font-size: 1rem; } /* Covered by new flex scroll */
+            .btn-detail { padding: 10px 18px; font-size: 13px; } 
+            .recommendation-card.swiper-slide { height: 210px; padding: 15px;} 
+            .recommendation-card h3 { font-size: 18px; }
+            .swiper-button-next, .swiper-button-prev { display: none; } 
         }
 
     </style>
@@ -945,64 +1005,66 @@
             <main id="page-home" class="page-content active">
                 <section class="internship-recommendations">
                     <h2>Rekomendasi Magang</h2>
-                    <div class="swiper-container recommendation-swiper">
+                    <div class="swiper-container recommendation-swiper-container"> 
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/E67E22/FFFFFF?text=Pertamina&font=Roboto');">
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/400x240/E67E22/FFFFFF?text=Pertamina&font=Poppins');">
                                 <div class="card-overlay"></div>
                                 <div class="card-content">
                                     <h3>Pertamina</h3>
-                                    <p class="card-subtitle">Shawn Gracia</p>
-                                    <p class="card-description">Perusahaan BUMN energi terbesar.</p>
-                                    <button class="btn-detail">Lihat Detail</button>
+                                    <p class="card-subtitle">Energi & Pertambangan</p>
+                                    <p class="card-description">Kesempatan emas di BUMN energi terbesar Indonesia.</p>
+                                    <button class="btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                                 </div>
                             </div>
-                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/2ECC71/FFFFFF?text=PT.KAI&font=Roboto');">
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://static.republika.co.id/uploads/images/inpicture_slide/logo-baru-kai-pt-kai-persero-resmi-mengubah-logo_201002185913-154.jpeg');">
                                 <div class="card-overlay"></div>
                                 <div class="card-content">
                                     <h3>PT. KAI</h3>
-                                    <p class="card-subtitle">Shawn Gracia</p>
-                                    <p class="card-description">Operator kereta api nasional.</p>
-                                    <button class="btn-detail">Lihat Detail</button>
+                                    <p class="card-subtitle">Transportasi & Logistik</p>
+                                    <p class="card-description">Bergabung dengan operator kereta api nasional.</p>
+                                    <button class="btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                                 </div>
                             </div>
-                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/3498DB/FFFFFF?text=Mandiri&font=Roboto');">
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/400x240/3498DB/FFFFFF?text=Bank+Mandiri&font=Poppins');">
                                 <div class="card-overlay"></div>
                                 <div class="card-content">
-                                    <h3>Mandiri</h3>
-                                    <p class="card-subtitle">Shawn Gracia</p>
-                                    <p class="card-description">Salah satu bank terbesar di Indonesia.</p>
-                                    <button class="btn-detail">Lihat Detail</button>
+                                    <h3>Bank Mandiri</h3>
+                                    <p class="card-subtitle">Keuangan & Perbankan</p>
+                                    <p class="card-description">Karir di salah satu bank terkemuka di Indonesia.</p>
+                                    <button class="btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                                 </div>
                             </div>
-                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/9B59B6/FFFFFF?text=Telkom+Indonesia&font=Roboto');">
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/400x240/9B59B6/FFFFFF?text=Telkom+Indonesia&font=Poppins');">
                                 <div class="card-overlay"></div>
                                 <div class="card-content">
                                     <h3>Telkom Indonesia</h3>
-                                    <p class="card-subtitle">Budi Doremi</p>
-                                    <p class="card-description">Perusahaan telekomunikasi terkemuka.</p>
-                                    <button class="btn-detail">Lihat Detail</button>
+                                    <p class="card-subtitle">Telekomunikasi & IT</p>
+                                    <p class="card-description">Inovasi di perusahaan telekomunikasi terdepan.</p>
+                                    <button class="btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                                 </div>
                             </div>
-                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/F1C40F/FFFFFF?text=Unilever&font=Roboto');">
+                            <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/400x240/F1C40F/2c3e50?text=Unilever&font=Poppins');">
                                 <div class="card-overlay"></div>
                                 <div class="card-content">
                                     <h3>Unilever</h3>
-                                    <p class="card-subtitle">Citra Kirana</p>
-                                    <p class="card-description">Produk konsumen global ternama.</p>
-                                    <button class="btn-detail">Lihat Detail</button>
+                                    <p class="card-subtitle">Barang Konsumsi</p>
+                                    <p class="card-description">Pengalaman di perusahaan produk konsumen global.</p>
+                                    <button class="btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                                 </div>
                             </div>
-                             <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/350x220/E74C3C/FFFFFF?text=Garuda+Indonesia&font=Roboto');">
+                             <div class="swiper-slide card recommendation-card" style="background-image: url('https://placehold.co/400x240/E74C3C/FFFFFF?text=Garuda+Indonesia&font=Poppins');">
                                 <div class="card-overlay"></div>
                                 <div class="card-content">
                                     <h3>Garuda Indonesia</h3>
-                                    <p class="card-subtitle">Rizky Billar</p>
-                                    <p class="card-description">Maskapai penerbangan nasional.</p>
-                                    <button class="btn-detail">Lihat Detail</button>
+                                    <p class="card-subtitle">Penerbangan & Pariwisata</p>
+                                    <p class="card-description">Terbang tinggi bersama maskapai nasional.</p>
+                                    <button class="btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                                 </div>
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
                 </section>
     
@@ -1021,8 +1083,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="company-grid">
-                        <div class="card card-hover-effect card-1" data-category="teknologi">
+                    <div class="company-grid"> <div class="card card-hover-effect card-1" data-category="teknologi">
                             <div class="card-img"></div>
                             <a href="#" class="card-link">
                                 <div class="card-img-hovered"></div>
@@ -1034,7 +1095,7 @@
                                 </div>
                                 <h1 class="card-title">PT Anjas Sejati</h1>
                                 <div class="card-creator">Deskripsi singkat Anjas Sejati. Bergerak di bidang AI.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                         <div class="card card-hover-effect card-2" data-category="keuangan">
@@ -1049,7 +1110,7 @@
                                 </div>
                                 <h1 class="card-title">PT Maju Bersama</h1>
                                 <div class="card-creator">Lembaga keuangan terpercaya sejak 1980.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                          <div class="card card-hover-effect card-3" data-category="manufaktur">
@@ -1064,7 +1125,7 @@
                                 </div>
                                 <h1 class="card-title">PT Cipta Karya</h1>
                                 <div class="card-creator">Produsen barang konsumsi berkualitas tinggi.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                         <div class="card card-hover-effect" data-category="energi" style="--card-img-url: url('https://placehold.co/325x200/F39C12/FFFFFF?text=Energi+Terbarukan&font=Roboto');">
@@ -1079,7 +1140,7 @@
                                 </div>
                                 <h1 class="card-title">PT Sinar Abadi</h1>
                                 <div class="card-creator">Pengembangan solusi energi terbarukan.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
 
@@ -1090,7 +1151,7 @@
                                 <div class="card-about"><span class="card-tag" style="background-color: #7D3C98; color:white !important;">Media</span><div class="card-time">Agency</div></div>
                                 <h1 class="card-title">Kreatif Solusi</h1>
                                 <div class="card-creator">Agensi media dengan fokus pada konten digital.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                         <div class="card card-hover-effect" data-category="konstruksi" style="--card-img-url: url('https://placehold.co/325x200/16A085/FFFFFF?text=Bangun+Jaya&font=Roboto');">
@@ -1100,7 +1161,7 @@
                                 <div class="card-about"><span class="card-tag" style="background-color: #16A085; color:white !important;">Konstruksi</span><div class="card-time">Kontraktor</div></div>
                                 <h1 class="card-title">Bangun Jaya Konstruksi</h1>
                                 <div class="card-creator">Spesialis konstruksi gedung bertingkat.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                         <div class="card card-hover-effect" data-category="retail" style="--card-img-url: url('https://placehold.co/325x200/D35400/FFFFFF?text=Retail+Makmur&font=Roboto');">
@@ -1110,7 +1171,7 @@
                                 <div class="card-about"><span class="card-tag" style="background-color: #D35400; color:white !important;">Retail</span><div class="card-time">Waralaba</div></div>
                                 <h1 class="card-title">Retail Makmur</h1>
                                 <div class="card-creator">Jaringan toko kelontong modern dan lengkap.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                         <div class="card card-hover-effect" data-category="transportasi" style="--card-img-url: url('https://placehold.co/325x200/27AE60/FFFFFF?text=Transport+Cepat&font=Roboto');">
@@ -1120,27 +1181,27 @@
                                 <div class="card-about"><span class="card-tag" style="background-color: #27AE60; color:white !important;">Transportasi</span><div class="card-time">Logistik</div></div>
                                 <h1 class="card-title">Transport Cepat</h1>
                                 <div class="card-creator">Solusi pengiriman barang antar kota.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
-                        <div class="card card-hover-effect" data-category="keuangan" style="--card-img-url: url('https://placehold.co/325x200/8E44AD/FFFFFF?text=Fintech+Inovasi&font=Roboto');">
+                         <div class="card card-hover-effect" data-category="teknologi" style="--card-img-url: url('https://placehold.co/325x200/2980B9/FFFFFF?text=Tech+Solution&font=Roboto');">
+                            <div class="card-img"></div>
+                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
+                            <div class="card-info">
+                                <div class="card-about"><span class="card-tag tag-news">Teknologi</span><div class="card-time">Konsultan</div></div>
+                                <h1 class="card-title">Solusi Tekno</h1>
+                                <div class="card-creator">Konsultasi dan implementasi sistem IT.</div>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
+                            </div>
+                        </div>
+                         <div class="card card-hover-effect" data-category="keuangan" style="--card-img-url: url('https://placehold.co/325x200/8E44AD/FFFFFF?text=Fintech+Inovasi&font=Roboto');">
                             <div class="card-img"></div>
                             <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
                             <div class="card-info">
                                 <div class="card-about"><span class="card-tag tag-deals">Keuangan</span><div class="card-time">Startup</div></div>
                                 <h1 class="card-title">Fintech Inovasi</h1>
                                 <div class="card-creator">Platform pembayaran digital terdepan.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
-                            </div>
-                        </div>
-                        <div class="card card-hover-effect" data-category="teknologi" style="--card-img-url: url('https://placehold.co/325x200/2C3E50/FFFFFF?text=Edukasi+Pintar&font=Roboto');">
-                            <div class="card-img"></div>
-                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
-                            <div class="card-info">
-                                <div class="card-about"><span class="card-tag tag-news">Teknologi</span><div class="card-time">Edutech</div></div>
-                                <h1 class="card-title">Edukasi Pintar</h1>
-                                <div class="card-creator">Platform belajar online interaktif.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
                         <div class="card card-hover-effect" data-category="manufaktur" style="--card-img-url: url('https://placehold.co/325x200/C0392B/FFFFFF?text=Manufaktur+Presisi&font=Roboto');">
@@ -1150,60 +1211,19 @@
                                 <div class="card-about"><span class="card-tag tag-politics">Manufaktur</span><div class="card-time">Pabrik</div></div>
                                 <h1 class="card-title">Manufaktur Presisi</h1>
                                 <div class="card-creator">Pembuatan komponen mesin presisi tinggi.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
-                        <div class="card card-hover-effect" data-category="energi" style="--card-img-url: url('https://placehold.co/325x200/F1C40F/FFFFFF?text=Energi+Hijau&font=Roboto');">
+                        <div class="card card-hover-effect" data-category="energi" style="--card-img-url: url('https://placehold.co/325x200/F1C40F/333333?text=Energi+Hijau&font=Roboto');">
                             <div class="card-img"></div>
                             <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
                             <div class="card-info">
                                 <div class="card-about"><span class="card-tag" style="background-color: #F1C40F; color:#333 !important;">Energi</span><div class="card-time">Swasta</div></div>
                                 <h1 class="card-title">Energi Hijau Nusantara</h1>
                                 <div class="card-creator">Penyedia solusi panel surya.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
+                                <button class="btn-detail explore-btn-detail"><i class="fas fa-arrow-right"></i> Lihat Detail</button>
                             </div>
                         </div>
-                        <div class="card card-hover-effect" data-category="media" style="--card-img-url: url('https://placehold.co/325x200/7F8C8D/FFFFFF?text=Media+Dinamis&font=Roboto');">
-                            <div class="card-img"></div>
-                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
-                            <div class="card-info">
-                                <div class="card-about"><span class="card-tag" style="background-color: #7F8C8D; color:white !important;">Media</span><div class="card-time">Digital</div></div>
-                                <h1 class="card-title">Media Digital Dinamis</h1>
-                                <div class="card-creator">Layanan streaming dan konten kreatif.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
-                            </div>
-                        </div>
-                        <div class="card card-hover-effect" data-category="konstruksi" style="--card-img-url: url('https://placehold.co/325x200/9B59B6/FFFFFF?text=Properti+Megah&font=Roboto');">
-                            <div class="card-img"></div>
-                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
-                            <div class="card-info">
-                                <div class="card-about"><span class="card-tag" style="background-color: #9B59B6; color:white !important;">Konstruksi</span><div class="card-time">Developer</div></div>
-                                <h1 class="card-title">Properti Megah</h1>
-                                <div class="card-creator">Pengembang perumahan elit dan komersial.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
-                            </div>
-                        </div>
-                        <div class="card card-hover-effect" data-category="retail" style="--card-img-url: url('https://placehold.co/325x200/34495E/FFFFFF?text=Toko+Serba+Ada&font=Roboto');">
-                            <div class="card-img"></div>
-                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
-                            <div class="card-info">
-                                <div class="card-about"><span class="card-tag" style="background-color: #34495E; color:white !important;">Retail</span><div class="card-time">UMKM</div></div>
-                                <h1 class="card-title">Toko Serba Ada</h1>
-                                <div class="card-creator">Menyediakan kebutuhan sehari-hari.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
-                            </div>
-                        </div>
-                        <div class="card card-hover-effect" data-category="transportasi" style="--card-img-url: url('https://placehold.co/325x200/1ABC9C/FFFFFF?text=Logistik+Handal&font=Roboto');">
-                            <div class="card-img"></div>
-                            <a href="#" class="card-link"><div class="card-img-hovered" style="background-image: var(--card-img-hovered-overlay), var(--card-img-url);"></div></a>
-                            <div class="card-info">
-                                <div class="card-about"><span class="card-tag" style="background-color: #1ABC9C; color:white !important;">Transportasi</span><div class="card-time">Nasional</div></div>
-                                <h1 class="card-title">Logistik Handal</h1>
-                                <div class="card-creator">Jasa kargo dan ekspedisi terpercaya.</div>
-                                <button class="btn-detail explore-btn-detail">Lihat Detail</button>
-                            </div>
-                        </div>
-
                     </div>
                 </section>
             </main>
@@ -1503,7 +1523,7 @@
                 }
 
                 // Special handling for Swiper on home page
-                if (pageId === 'page-home' && typeof Swiper !== 'undefined' && !window.recommendationSwiperInstance) {
+                if (pageId === 'page-home' && typeof Swiper !== 'undefined') { // Always try to initialize if home page
                     initializeSwiper();
                 }
             }
@@ -1544,30 +1564,34 @@
             
             // --- Home Page Specific JS (Swiper & Category Filter from script.js) ---
             function initializeSwiper() {
-                if (document.querySelector('.recommendation-swiper') && typeof Swiper !== 'undefined') {
+                const swiperContainer = document.querySelector('.recommendation-swiper-container');
+                if (swiperContainer && typeof Swiper !== 'undefined') {
                      if (window.recommendationSwiperInstance) {
-                        window.recommendationSwiperInstance.destroy(true, true); // Destroy existing instance if any
+                        window.recommendationSwiperInstance.destroy(true, true); 
                      }
-                     window.recommendationSwiperInstance = new Swiper('.recommendation-swiper', {
-                        slidesPerView: 1.2,
+                     window.recommendationSwiperInstance = new Swiper('.recommendation-swiper-container', { 
+                        effect: 'slide', // Mengubah efek menjadi 'slide' standar
+                        slidesPerView: 1.2, 
                         spaceBetween: 15,
+                        centeredSlides: false, // Biasanya false untuk efek slide standar jika slidesPerView > 1
+                        loop: true, 
+                        autoplay: { 
+                            delay: 3500, // Sedikit percepat autoplay
+                            disableOnInteraction: false,
+                        },
                         pagination: {
                             el: '.swiper-pagination',
                             clickable: true,
                         },
-                        breakpoints: {
-                            640: { slidesPerView: 2.2, spaceBetween: 20 },
-                            768: { slidesPerView: 2.5, spaceBetween: 20 },
-                            1024: { slidesPerView: 3, spaceBetween: 25 },
-                            1200: { slidesPerView: 3.3, spaceBetween: 25 }
+                        navigation: { 
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
                         },
-                        loop: false, // Set to false if you don't want infinite loop
-                        on: {
-                            slideChangeTransitionEnd: function () {
-                                // if (this.activeIndex !== 0 && this.slides.length > 1) { 
-                                    // No automatic slide back
-                                // }
-                            },
+                        breakpoints: { 
+                            640: { slidesPerView: 2.2, spaceBetween: 20, centeredSlides: false },
+                            768: { slidesPerView: 2.5, spaceBetween: 20, centeredSlides: false }, 
+                            1024: { slidesPerView: 3, spaceBetween: 25, centeredSlides: false },
+                            1200: { slidesPerView: 3.5, spaceBetween: 25, centeredSlides: false } // Mungkin bisa menampilkan lebih banyak
                         }
                     });
                 }
@@ -1586,7 +1610,7 @@
                     companyCards.forEach(card => {
                         const cardCategory = card.dataset.category;
                         if (selectedCategory === "" || cardCategory === selectedCategory) {
-                            card.style.display = ""; // Or 'flex' if it was display:flex before
+                            card.style.display = ""; 
                         } else {
                             card.style.display = "none";
                         }
@@ -1668,7 +1692,7 @@
 
             function addItemToDisplay(listElement, name, details, predefinedCardContainerElement = null) {
                  if (!listElement || Array.from(listElement.children).some(child => child.querySelector('.item-name') && child.querySelector('.item-name').textContent.toLowerCase() === name.toLowerCase())) {
-                    return;
+                    return; 
                 }
 
                 const itemDiv = document.createElement('div');
@@ -1695,10 +1719,10 @@
                     itemDiv.style.opacity = 0;
                     setTimeout(() => {
                         itemDiv.remove();
-                        if (predefinedCardContainerElement) {
+                        if (predefinedCardContainerElement) { 
                             Array.from(predefinedCardContainerElement.querySelectorAll('.preference-option-card.active, .skill-option-card.active')).forEach(activeCard => {
                                 if (activeCard.dataset.value.toLowerCase() === name.toLowerCase()) {
-                                    activeCard.classList.remove('active');
+                                    activeCard.classList.remove('active'); 
                                 }
                             });
                         }
@@ -1711,8 +1735,8 @@
                 setTimeout(() => {
                     itemDiv.style.transform = 'scale(1)';
                     itemDiv.style.opacity = 1;
-                }, 10);
-                itemDiv.style.transform = 'scale(0.9)';
+                }, 10); 
+                itemDiv.style.transform = 'scale(0.9)'; 
                 itemDiv.style.opacity = 0;
                 itemDiv.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
             }
@@ -1728,7 +1752,7 @@
                     tools.forEach(toolName => {
                          addItemToDisplay(toolsDisplayArea, toolName, null);
                     });
-                    toolsInput.value = '';
+                    toolsInput.value = ''; 
                 };
             }
             
@@ -1736,7 +1760,7 @@
             if (predefinedSkillCards.length > 0) {
                 predefinedSkillCards.forEach(card => {
                     card.addEventListener('click', function() {
-                        this.classList.toggle('active');
+                        this.classList.toggle('active'); 
                     });
                 });
             }
@@ -1751,7 +1775,6 @@
                         if (card.classList.contains('active')) {
                             const skillValue = card.dataset.value;
                             addItemToDisplay(otherSkillsDisplayArea, skillValue, 'Dipilih dari daftar', document.getElementById('predefinedOtherSkills'));
-                            card.classList.remove('active');
                         }
                     });
 
@@ -1775,6 +1798,7 @@
                 const displayArea = document.getElementById(config.displayAreaId);
 
                 if (!predefinedContainer || !addOtherCard || !manualArea || !manualInput || !addManualBtn || !displayArea) {
+                    console.warn("Satu atau lebih elemen untuk setupPreferenceSection tidak ditemukan:", config);
                     return;
                 }
 
@@ -1783,11 +1807,15 @@
                     if (card) {
                         const value = card.dataset.value;
                         const wasActive = card.classList.contains('active');
-                        card.classList.toggle('active');
-                        if (!wasActive) {
+                        card.classList.toggle('active'); 
+
+                        if (!wasActive) { 
                              addItemToDisplay(displayArea, value, config.itemDetailSourcePilihan || 'Pilihan', predefinedContainer);
-                        } else {
-                            const tagToRemove = Array.from(displayArea.children).find(child => child.querySelector('.item-name') && child.querySelector('.item-name').textContent.toLowerCase() === value.toLowerCase());
+                        } else { 
+                            const tagToRemove = Array.from(displayArea.children).find(child => 
+                                child.querySelector('.item-name') && 
+                                child.querySelector('.item-name').textContent.toLowerCase() === value.toLowerCase()
+                            );
                             if (tagToRemove) tagToRemove.remove();
                         }
                     }
@@ -1800,7 +1828,7 @@
                     const value = manualInput.value.trim();
                     if (value) {
                         addItemToDisplay(displayArea, value, config.itemDetailSourceManual || 'Manual', predefinedContainer);
-                        manualInput.value = '';
+                        manualInput.value = ''; 
                         Array.from(predefinedContainer.querySelectorAll('.preference-option-card:not(.add-other-preference-card):not(.active)')).forEach(pCard => {
                             if (pCard.dataset.value.toLowerCase() === value.toLowerCase()) pCard.classList.add('active');
                         });
@@ -1828,15 +1856,15 @@
             const saveProfileDataBtn = document.getElementById('saveProfileDataBtn');
             if(saveProfileDataBtn) {
                 saveProfileDataBtn.onclick = function() {
-                    alert('Data profil disimpan (prototipe)! Implementasi backend diperlukan.');
+                    alert('Data profil disimpan (prototipe)! Implementasi backend diperlukan untuk penyimpanan data sebenarnya.');
                 };
             }
 
             // --- Settings Page Specific JS (from settings.html) ---
             const avatarUpload = document.getElementById('avatarUpload');
             const avatarPreview = document.getElementById('avatarPreview'); 
-            const settingsFirstNameInput = document.getElementById('firstName'); // Scoped to settings
-            const settingsLastNameInput = document.getElementById('lastName'); // Scoped to settings
+            const settingsFirstNameInput = document.getElementById('firstName'); 
+            const settingsLastNameInput = document.getElementById('lastName'); 
 
 
             if (avatarUpload && avatarPreview) {
@@ -1882,7 +1910,7 @@
             const deactivateAccountBtn = document.getElementById('deactivateAccountBtn');
             if(deactivateAccountBtn) {
                 deactivateAccountBtn.addEventListener('click', function(e) {
-                     if(confirm("Apakah Anda yakin ingin menonaktifkan akun Anda?")){
+                     if(confirm("Apakah Anda yakin ingin menonaktifkan akun Anda? Tindakan ini tidak dapat diurungkan.")){
                          alert('Akun dinonaktifkan (prototipe)!');
                      }
                 });
