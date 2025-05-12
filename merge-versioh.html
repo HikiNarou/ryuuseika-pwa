@@ -186,6 +186,7 @@
             transition: background-color 0.3s, color 0.3s;
             font-size: 15px; /* from profile_data */
             line-height: 1.6; /* from profile_data */
+            overflow-x: hidden; /* Prevent horizontal scroll on body */
         }
         a { text-decoration: none; color: var(--primary-color); transition: color 0.2s; }
         a:hover { color: var(--primary-hover-color); }
@@ -214,10 +215,35 @@
             top: 0;
             bottom: 0;
             z-index: 1000;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: width 0.3s ease, background-color 0.3s, box-shadow 0.3s; /* Added width transition */
         }
-        .logo { margin-bottom: 35px; /* from profile_data */ }
-        .logo img { width: 50px; /* from profile_data */ height: auto; transition: transform 0.3s ease; }
+        .sidebar.collapsed {
+            width: 60px; /* Collapsed width - icons only */
+        }
+        .sidebar.collapsed .logo {
+             padding: 0 5px; /* Adjust logo padding when collapsed */
+        }
+        .sidebar.collapsed .logo img {
+            width: 40px; /* Smaller logo when collapsed */
+        }
+        .sidebar.collapsed .navigation ul li a {
+            width: 45px; /* Adjust link width for collapsed state */
+            height: 45px; /* Adjust link height */
+        }
+        .sidebar.collapsed .navigation ul li .nav-text {
+            display: none; /* Hide text when collapsed */
+        }
+        .sidebar.collapsed .navigation ul li .icon {
+            font-size: 20px; /* Slightly smaller icon when collapsed */
+            margin-bottom: 0;
+        }
+        .sidebar.collapsed .sidebar-toggle {
+            right: -18px; /* Adjust position when collapsed */
+        }
+
+
+        .logo { margin-bottom: 35px; /* from profile_data */ transition: padding 0.3s ease; }
+        .logo img { width: 50px; /* from profile_data */ height: auto; transition: transform 0.3s ease, width 0.3s ease; }
         .logo img:hover { transform: scale(1.1); }
         .dark-theme .logo img { filter: brightness(0.9) saturate(1.2); }
 
@@ -234,10 +260,10 @@
             width: 60px; /* from profile_data */
             height: 60px; /* from profile_data */
             margin: 0 auto;
-            transition: background-color 0.2s, color 0.2s, transform 0.2s;
+            transition: background-color 0.2s, color 0.2s, transform 0.2s, width 0.3s ease, height 0.3s ease;
         }
-        .navigation ul li .icon { font-size: 22px; /* from profile_data */ margin-bottom: 4px; }
-        .navigation ul li .nav-text { font-size: 11px; /* from profile_data */ font-weight: 500; }
+        .navigation ul li .icon { font-size: 22px; /* from profile_data */ margin-bottom: 4px; transition: font-size 0.3s ease, margin-bottom 0.3s ease; }
+        .navigation ul li .nav-text { font-size: 11px; /* from profile_data */ font-weight: 500; transition: display 0.3s ease; }
         .navigation ul li.active a {
             background-color: var(--nav-icon-active-bg);
             color: var(--nav-icon-active-color) !important;
@@ -255,16 +281,46 @@
         .navigation ul li a:hover .nav-text {
             color: var(--nav-icon-hover-color);
         }
+        
+        .sidebar-toggle {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 20px;
+            right: -15px; /* Positioned to peek out */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, right 0.3s ease, background-color 0.3s ease;
+            z-index: 1001; /* Ensure it's above sidebar content */
+        }
+        .sidebar-toggle:hover {
+            background-color: var(--primary-hover-color);
+            transform: scale(1.1);
+        }
+
 
         /* Main Content Wrapper (replaces individual .main-content for layout) */
         .main-content-wrapper {
             flex-grow: 1;
             padding: 25px; /* from profile_data */
             margin-left: 90px; /* Width of sidebar */
-            overflow-y: auto;
+            overflow-y: auto; /* Allow vertical scroll */
+            overflow-x: hidden; /* Prevent horizontal scroll */
             background-color: var(--body-bg); /* Match body background */
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, margin-left 0.3s ease; /* Added margin-left transition */
         }
+        .main-content-wrapper.sidebar-collapsed {
+            margin-left: 60px; /* Adjust margin when sidebar is collapsed */
+        }
+
 
         /* Shared Header (Using profile_data.html structure and styles) */
         .header {
@@ -357,6 +413,7 @@
             width: 100%;
             padding-bottom: 50px; /* Increased padding for pagination and nav */
             position: relative; /* For nav buttons */
+            overflow: hidden; /* MODIFIED: Prevent horizontal overflow from swiper */
         }
         .recommendation-card.swiper-slide {
             background-color: var(--card-bg); /* Use theme variable */
@@ -378,17 +435,17 @@
             /* Specific dark theme adjustments if needed, though var(--card-bg) should handle it */
         }
         .recommendation-card.swiper-slide:hover { 
-            transform: translateY(-5px); /* Subtle hover, coverflow has its own transform */
-            box-shadow: 0 10px 22px color-mix(in srgb, var(--primary-color) 25%, transparent);
+            transform: translateY(-6px) scale(1.02); /* MODIFIED: Enhanced hover effect */
+            box-shadow: 0 12px 25px color-mix(in srgb, var(--primary-color) 30%, transparent);
         }
         .recommendation-card .card-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.05) 65%); /* Adjusted gradient */
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.05) 70%); /* MODIFIED: Slightly stronger gradient */
             border-radius: 15px; z-index: 1;
             transition: background 0.3s ease;
         }
         .recommendation-card:hover .card-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 25%, rgba(0,0,0,0) 70%);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0) 75%); /* MODIFIED: Stronger on hover */
         }
         .recommendation-card .card-content { position: relative; z-index: 2; }
         .recommendation-card h3 { 
@@ -418,8 +475,8 @@
         }
         .btn-detail:hover { 
             background-color: var(--primary-hover-color); 
-            transform: translateY(-2px); 
-            box-shadow: 0 5px 12px color-mix(in srgb, var(--primary-color) 25%, transparent);
+            transform: translateY(-2px) scale(1.05); /* MODIFIED: Button specific hover */
+            box-shadow: 0 5px 12px color-mix(in srgb, var(--primary-color) 35%, transparent);
         }
         .btn-detail .fas { font-size: 0.9em; } /* Icon size relative to button text */
 
@@ -472,7 +529,7 @@
 
 
         .explore-companies { margin-bottom: 30px; }
-        .explore-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .explore-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; /* Reduced margin */ }
         .category-filter select {
             padding: 8px 12px; border-radius: 6px; border: 1px solid var(--input-border);
             background-color: var(--input-bg); font-size: 14px;
@@ -483,6 +540,21 @@
              background-color: var(--input-bg-dark);
              color: var(--text-color-dark);
         }
+        /* MODIFIED: Added style for active filter display */
+        #activeFilterDisplay {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 15px; /* Space below the filter text */
+            padding: 8px 12px;
+            background-color: var(--tag-bg);
+            border-radius: 6px;
+            display: none; /* Hidden by default */
+        }
+        .dark-theme #activeFilterDisplay {
+            background-color: var(--tag-bg-dark);
+            color: var(--text-muted-dark);
+        }
+
 
         /* Updated styles for company-grid to use CSS Grid and be responsive */
         .company-grid {
@@ -903,18 +975,50 @@
 
         /* Responsive adjustments (Combined and refined) */
         @media (max-width: 992px) { /* Tablet */
+             .sidebar.collapsed .sidebar-toggle {
+                right: -15px; /* Adjust for smaller screens */
+            }
+             .main-content-wrapper.sidebar-collapsed {
+                margin-left: 60px;
+            }
         }
 
         @media (max-width: 768px) { /* Mobile landscape / Small Tablet */
             .main-content-wrapper { margin-left: 0; padding: 15px; }
+            .main-content-wrapper.sidebar-collapsed { /* Ensure no negative margin or conflicts */
+                margin-left: 0;
+            }
             .sidebar {
                 width: 100%; height: 70px; flex-direction: row; justify-content: space-around;
                 bottom: 0; top: auto; box-shadow: 0 -3px 10px var(--shadow-color);
+                padding: 0 10px; /* Adjust padding for horizontal layout */
             }
+            .sidebar.collapsed { /* Mobile collapsed state - effectively same as expanded for bottom bar */
+                width: 100%; 
+                height: 70px;
+            }
+            .sidebar.collapsed .navigation ul li a {
+                width: 55px;
+                height: 55px;
+            }
+            .sidebar.collapsed .navigation ul li .nav-text {
+                display: block; /* Always show text on mobile bottom bar */
+                font-size: 10px; /* Smaller text for mobile */
+            }
+             .sidebar.collapsed .navigation ul li .icon {
+                font-size: 18px; /* Smaller icon for mobile */
+                margin-bottom: 2px;
+            }
+
             .logo { display: none; } 
-            .navigation ul { display: flex; width: auto; gap: 5px; }
+            .sidebar-toggle { display: none; } /* Hide toggle on mobile as sidebar is now a bottom bar */
+
+            .navigation ul { display: flex; width: auto; gap: 5px; align-items: center; height: 100%;}
             .navigation ul li { margin-bottom: 0; }
             .navigation ul li a { width: 55px; height: 55px; } 
+            .navigation ul li .nav-text { font-size: 10px; }
+            .navigation ul li .icon { font-size: 18px; margin-bottom: 2px; }
+
 
             .header {
                 border-radius: 0; margin-left: -15px; margin-right: -15px; padding: 12px 15px;
@@ -927,9 +1031,9 @@
             .search-bar .search-button { width: 28px; height: 28px; font-size: 12px; }
 
             .profile-data-page, .settings-page, #page-home {
-                 margin-bottom: 70px; 
+                 margin-bottom: 85px; /* Increased to avoid overlap with bottom bar */
             }
-             #page-home { padding-bottom: 70px; }
+             #page-home { padding-bottom: 85px; }
 
 
             .profile-data-page h1 { font-size: 22px; }
@@ -974,7 +1078,10 @@
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="pageSidebar">
+            <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
             <div class="logo">
                 <img src="https://i.ibb.co/mCpp6NzJ/sikma-logo2-removebg-preview.png" alt="Logo SIKMA">
             </div>
@@ -987,7 +1094,7 @@
             </nav>
         </aside>
 
-        <div class="main-content-wrapper">
+        <div class="main-content-wrapper" id="mainContentWrapper">
             <header class="header">
                 <div class="user-profile">
                     <img src="https://placehold.co/60x60/3498db/ffffff?text=U" alt="Foto Profil" class="avatar" id="sharedAvatarPreview">
@@ -1083,6 +1190,7 @@
                             </select>
                         </div>
                     </div>
+                    <div id="activeFilterDisplay"></div>
                     <div class="company-grid"> <div class="card card-hover-effect card-1" data-category="teknologi">
                             <div class="card-img"></div>
                             <a href="#" class="card-link">
@@ -1477,6 +1585,44 @@
             const header = document.querySelector('.header');
             const sharedUserName = document.getElementById('sharedUserName');
             const sharedAvatarPreview = document.getElementById('sharedAvatarPreview');
+            const sidebar = document.getElementById('pageSidebar'); // MODIFIED: Get sidebar element
+            const mainContentWrapper = document.getElementById('mainContentWrapper'); // MODIFIED: Get main content wrapper
+            const sidebarToggleBtn = document.getElementById('sidebarToggleBtn'); // MODIFIED: Get toggle button
+
+            // --- Sidebar Toggle Functionality ---
+            function setSidebarState(collapsed) {
+                if (sidebar && mainContentWrapper && sidebarToggleBtn) {
+                    const icon = sidebarToggleBtn.querySelector('i');
+                    if (collapsed) {
+                        sidebar.classList.add('collapsed');
+                        mainContentWrapper.classList.add('sidebar-collapsed');
+                        icon.classList.remove('fa-chevron-left');
+                        icon.classList.add('fa-chevron-right');
+                        localStorage.setItem('sidebarCollapsed', 'true');
+                    } else {
+                        sidebar.classList.remove('collapsed');
+                        mainContentWrapper.classList.remove('sidebar-collapsed');
+                        icon.classList.remove('fa-chevron-right');
+                        icon.classList.add('fa-chevron-left');
+                        localStorage.setItem('sidebarCollapsed', 'false');
+                    }
+                }
+            }
+
+            if (sidebarToggleBtn) {
+                sidebarToggleBtn.addEventListener('click', () => {
+                    const isCollapsed = sidebar.classList.contains('collapsed');
+                    setSidebarState(!isCollapsed);
+                });
+            }
+            // Retrieve and apply sidebar state from localStorage
+            const savedSidebarState = localStorage.getItem('sidebarCollapsed');
+            if (savedSidebarState === 'true') {
+                setSidebarState(true);
+            } else {
+                setSidebarState(false); // Default to expanded if no saved state or saved as false
+            }
+
 
             // --- Theme Management (Combined from settings.html & profile_data.html) ---
             const darkModeToggle = document.getElementById('darkModeToggle');
@@ -1523,8 +1669,12 @@
                 }
 
                 // Special handling for Swiper on home page
-                if (pageId === 'page-home' && typeof Swiper !== 'undefined') { // Always try to initialize if home page
+                if (pageId === 'page-home' && typeof Swiper !== 'undefined') { 
                     initializeSwiper();
+                }
+                 // Ensure main content scrolls to top on page change
+                if (mainContentWrapper) {
+                    mainContentWrapper.scrollTop = 0;
                 }
             }
             // Initial page display (Home)
@@ -1533,7 +1683,6 @@
 
             // --- Sticky Header ---
             if (header) {
-                // Select the correct scrollable container
                 const scrollContainer = document.querySelector('.main-content-wrapper');
                 if (scrollContainer) {
                     scrollContainer.addEventListener('scroll', () => {
@@ -1570,13 +1719,13 @@
                         window.recommendationSwiperInstance.destroy(true, true); 
                      }
                      window.recommendationSwiperInstance = new Swiper('.recommendation-swiper-container', { 
-                        effect: 'slide', // Mengubah efek menjadi 'slide' standar
+                        effect: 'slide', 
                         slidesPerView: 1.2, 
                         spaceBetween: 15,
-                        centeredSlides: false, // Biasanya false untuk efek slide standar jika slidesPerView > 1
+                        centeredSlides: false, 
                         loop: true, 
                         autoplay: { 
-                            delay: 3500, // Sedikit percepat autoplay
+                            delay: 3500, 
                             disableOnInteraction: false,
                         },
                         pagination: {
@@ -1591,7 +1740,7 @@
                             640: { slidesPerView: 2.2, spaceBetween: 20, centeredSlides: false },
                             768: { slidesPerView: 2.5, spaceBetween: 20, centeredSlides: false }, 
                             1024: { slidesPerView: 3, spaceBetween: 25, centeredSlides: false },
-                            1200: { slidesPerView: 3.5, spaceBetween: 25, centeredSlides: false } // Mungkin bisa menampilkan lebih banyak
+                            1200: { slidesPerView: 3.5, spaceBetween: 25, centeredSlides: false } 
                         }
                     });
                 }
@@ -1604,17 +1753,30 @@
 
             const categorySelect = document.getElementById('companyCategoryFilter');
             const companyCards = document.querySelectorAll('#page-home .company-grid .card.card-hover-effect');
-            if (categorySelect && companyCards.length > 0) {
+            const activeFilterDisplay = document.getElementById('activeFilterDisplay'); // MODIFIED: Get active filter display element
+
+            if (categorySelect && companyCards.length > 0 && activeFilterDisplay) { // MODIFIED: Check activeFilterDisplay
                 categorySelect.addEventListener('change', function () {
-                    const selectedCategory = this.value;
+                    const selectedCategoryValue = this.value;
+                    const selectedCategoryText = this.options[this.selectedIndex].text;
+
                     companyCards.forEach(card => {
                         const cardCategory = card.dataset.category;
-                        if (selectedCategory === "" || cardCategory === selectedCategory) {
+                        if (selectedCategoryValue === "" || cardCategory === selectedCategoryValue) {
                             card.style.display = ""; 
                         } else {
                             card.style.display = "none";
                         }
                     });
+
+                    // MODIFIED: Update active filter display
+                    if (selectedCategoryValue === "") {
+                        activeFilterDisplay.style.display = "none";
+                        activeFilterDisplay.textContent = "";
+                    } else {
+                        activeFilterDisplay.textContent = "Menampilkan kategori: " + selectedCategoryText;
+                        activeFilterDisplay.style.display = "block";
+                    }
                 });
             }
 
